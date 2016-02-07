@@ -1,17 +1,18 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Colu.Client.Models
 {
     public class Settings
     {
-        [JsonProperty(PropertyName="apiKey")]
+        [JsonProperty(PropertyName = "network")]
         public String Network { get; set; }
 
+        [JsonProperty(PropertyName = "apiKey")]
         public String ApiKey { get; set; }
+
+        public String colourCoinsHost { get; set; }
+
+        public String coluHost { get; set; }
     }
 }
