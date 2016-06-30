@@ -1,0 +1,21 @@
+Example calls
+
+Works
+curl -X POST -i http://bitcoinaa3.cloudapp.net:8081/ -H "Content-Type:application/json" --data '{ "jsonrpc": "2.0", "method": "hdwallet.getAddress", "id": "1" }'
+
+curl -X POST -i http://bitcoinaa3.cloudapp.net:8081/ -H "Content-Type:application/json" --data '{ "jsonrpc": "2.0","method": "coloredCoins.getAssetData", "id": "1", "params": { "addresses":["14GZQEndnPLD94WT9nw2RupVxsw448RoSh”]} }'
+
+Works
+curl -X POST -i http://bitcoinaa3.cloudapp.net:8081/ -H "Content-Type:application/json" --data '{ "jsonrpc": "2.0", "method": "coloredCoins.getStakeHolders", "id": "1", "params": { "assetId":"Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ", "numConfirmations":"0"} }'
+
+Works
+curl -X POST -i http://bitcoinaa3.cloudapp.net:8081/ -H "Content-Type:application/json" --data '{ "jsonrpc": "2.0", "method": "getAssets" }'
+
+Works
+curl -X POST -i http://bitcoinaa3.cloudapp.net:8081/ -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"issueAsset", "id":"1", "params":{"amount":1,"reissueable":false,"metadata":{"Decription":"Annual Membership","Expires":"0001-01-01T00:00:00"},"transfer":[{"amount":1}],"issueAddress":"1AiuGntRbTZ8At6Qf28seE3BHcj1QRNvww","divisibility":0},"to":[{"address":"13r7hhidTLHo1tpu9aWxCvQx1FgKGbsJPv","amount":1}]}'
+
+
+curl -X POST -i http://bitcoinaa3.cloudapp.net:8081/ -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"issueAsset", "id":"1", "params":{"amount":1,"reissueable":false,"metadata":{"Decription":"Annual Membership","Expires":"0001-01-01T00:00:00"},"transfer":[{"amount":1}],"issueAddress":"1AiuGntRbTZ8At6Qf28seE3BHcj1QRNvww","divisibility":0},"to":[{"phoneNumber":"61407928417","amount":1}]}'
+
+curl -X POST -i http://bitcoinaa3.cloudapp.net:8081/ -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"issueAsset", "id":"1", "params":{"amount":1,"reissueable":false,"metadata":{"Decription":"Annual Membership","Expires":"0001-01-01T00:00:00"},"transfer":[{"amount":1}],"issueAddress":"1AiuGntRbTZ8At6Qf28seE3BHcj1QRNvww","divisibility":0},"to":[{"address":"1KniEvPee5597uTXzk8T77JoSD12GDfPhu","amount":1}]}'
+
