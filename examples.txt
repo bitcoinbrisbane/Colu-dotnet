@@ -1,0 +1,3 @@
+Example calls
+
+curl -X POST -i http://xxx.cloudapp.net:8081/ -H "Content-Type:application/json" --data '{ "jsonrpc": "2.0","method": "coloredCoins.getAssetData", "id": "1", "params": { "addresses":["14GZQEndnPLD94WT9nw2RupVxsw448RoSh”]} }'
