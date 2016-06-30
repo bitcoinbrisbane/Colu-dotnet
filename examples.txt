@@ -13,3 +13,9 @@ curl -X POST -i http://bitcoinaa3.cloudapp.net:8081/ -H "Content-Type:applicatio
 
 Works
 curl -X POST -i http://bitcoinaa3.cloudapp.net:8081/ -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"issueAsset", "id":"1", "params":{"amount":1,"reissueable":false,"metadata":{"Decription":"Annual Membership","Expires":"0001-01-01T00:00:00"},"transfer":[{"amount":1}],"issueAddress":"1AiuGntRbTZ8At6Qf28seE3BHcj1QRNvww","divisibility":0},"to":[{"address":"13r7hhidTLHo1tpu9aWxCvQx1FgKGbsJPv","amount":1}]}'
+
+
+curl -X POST -i http://bitcoinaa3.cloudapp.net:8081/ -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"issueAsset", "id":"1", "params":{"amount":1,"reissueable":false,"metadata":{"Decription":"Annual Membership","Expires":"0001-01-01T00:00:00"},"transfer":[{"amount":1}],"issueAddress":"1AiuGntRbTZ8At6Qf28seE3BHcj1QRNvww","divisibility":0},"to":[{"phoneNumber":"61407928417","amount":1}]}'
+
+curl -X POST -i http://bitcoinaa3.cloudapp.net:8081/ -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"issueAsset", "id":"1", "params":{"amount":1,"reissueable":false,"metadata":{"Decription":"Annual Membership","Expires":"0001-01-01T00:00:00"},"transfer":[{"amount":1}],"issueAddress":"1AiuGntRbTZ8At6Qf28seE3BHcj1QRNvww","divisibility":0},"to":[{"address":"1KniEvPee5597uTXzk8T77JoSD12GDfPhu","amount":1}]}'
+
