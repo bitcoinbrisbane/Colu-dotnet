@@ -18,6 +18,15 @@ namespace ConsoleApplication1
             _httpClient = new HttpClient();
         }
 
+        public async Task<String> GetStakeHoldersAsync(GetStakeHoldersRequest request)
+        {
+            String json = JsonConvert.SerializeObject(request);
+            StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
+            String url = String.Format("{0}", _apiUrl);
+
+            return await Get(requestContent, url);
+        }
+
         public async Task<String> IssueAsync(SendRequest request)
         {
             String json = JsonConvert.SerializeObject(request);
@@ -40,7 +49,16 @@ namespace ConsoleApplication1
             }
         }
 
-        public async Task<String> SendAssetAsync(SendAsset request)
+        public async Task<String> GetAddressAsync(GetAddressRequest request)
+        {
+            String json = JsonConvert.SerializeObject(request);
+            StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
+            String url = String.Format("{0}", _apiUrl);
+
+            return await Get(requestContent, url);
+        }
+
+        public async Task<String> SendAssetAsync(SendAssetRequest request)
         {
             String json = JsonConvert.SerializeObject(request);
             StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
@@ -83,23 +101,6 @@ namespace ConsoleApplication1
             _httpClient.Dispose();
         }
     }
-
-    [Obsolete]
-    public class GetAddress
-    {
-        public String jsonrpc { get; set; }
-
-        public String method { get; set; }
-
-        public String id { get; set; }
-
-        public GetAddress()
-        {
-            this.method = "hdwallet.getAddress";
-            this.jsonrpc = "2.0";
-        }
-    }
-
 
     public class MetaData
     {

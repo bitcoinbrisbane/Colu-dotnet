@@ -14,6 +14,16 @@ namespace ConsoleApplication1
             {
                 var address = client.GetAddressAsync().Result;
 
+                var stake = new GetStakeHoldersRequest()
+                {
+                    id = "1"
+                };
+
+                stake.Params.AssetId = "Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ";
+                stake.Params.numConfirmations = "0";
+
+                var x = client.GetStakeHoldersAsync(stake).Result;
+
                 Asset asset = new Asset() { amount = 1, divisibility = 0 };
                 //asset.amount = 1;
                 //asset.divisibility = 0;
@@ -29,7 +39,7 @@ namespace ConsoleApplication1
 
                 To pudx = new To() { amount = 1, address = "13r7hhidTLHo1tpu9aWxCvQx1FgKGbsJPv" };
 
-                SendAsset request = new SendAsset();
+                SendAssetRequest request = new SendAssetRequest();
                 request.param = asset;
                 request.to.Add(pudx);
 
