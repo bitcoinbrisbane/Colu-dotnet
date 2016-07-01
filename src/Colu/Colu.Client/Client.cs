@@ -1,4 +1,5 @@
 ﻿using Colu.Client.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,38 +9,115 @@ using System.Threading.Tasks;
 
 namespace Colu.Client
 {
-    public class Client
+    public class ColuClient : IDisposable
     {
-        private String coluHost;
+        private readonly String _host;
+        private readonly HttpClient _httpClient;
 
-        public Client(Settings settings)
+        public ColuClient(String host)
         {
-            //var mainnetColuHost = 'https://engine.colu.co'
-            //var testnetColuHost = 'https://testnet.engine.colu.co'
+            _httpClient = new HttpClient();
+            _host = host;
+        }
 
-            if (settings.Network == "Testnet")
+        public async Task<String> GetStakeHoldersAsync(GetStakeHoldersRequest request)
+        {
+            String json = JsonConvert.SerializeObject(request);
+            StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
+            String url = String.Format("{0}", _host);
+
+            return await Get(requestContent, url);
+        }
+
+        public async Task<String> IssueAsync(SendRequest request)
+        {
+            String json = JsonConvert.SerializeObject(request);
+            StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
+            String url = String.Format("{0}", _host);
+
+            using (HttpResponseMessage responseMessage = await _httpClient.PostAsync(url, requestContent))
             {
-                coluHost = "https://testnet.engine.colu.co";
-            }
-            else
-            {
-                coluHost = "https://engine.colu.co";
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    String responseContent = await responseMessage.Content.ReadAsStringAsync();
+                    //Models.User.UpdateUserResponse response = JsonConvert.DeserializeObject<Models.User.UpdateUserResponse>(responseContent);
+
+                    return responseContent;
+                }
+                else
+                {
+                    throw new InvalidOperationException();
+                }
             }
         }
 
-        /// <summary>
-        /// Get Address Info http://documentation.colu.co/#GetAddressInfo
-        /// </summary>
-        /// <param name="address">Asset address</param>
-        /// <returns></returns>
-        public async Task<GetAddressResponse> GetAddressInfoAsync(String address)
+        public async Task<String> GetAddressAsync(GetAddressRequest request)
         {
-            using (HttpClient client = new HttpClient())
+            String json = JsonConvert.SerializeObject(request);
+            StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
+            String url = String.Format("{0}", _host);
+
+            return await Get(requestContent, url);
+        }
+
+        public async Task<String> SendAssetAsync(SendAssetRequest request)
+        {
+            String json = JsonConvert.SerializeObject(request);
+            StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
+            String url = String.Format("{0}", _host);
+
+            return await Get(requestContent, url);
+        }
+
+        private async Task<string> Get(StringContent requestContent, string url)
+        {
+            using (HttpResponseMessage responseMessage = await _httpClient.PostAsync(url, requestContent))
             {
-                String json = await client.GetStringAsync(String.Format("{0}/coloredcoins?func=addressinfo&address={1}", coluHost, address));
-                GetAddressResponse response = Newtonsoft.Json.JsonConvert.DeserializeObject<GetAddressResponse>(json);
-                return response;
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    String responseContent = await responseMessage.Content.ReadAsStringAsync();
+                    //Models.User.UpdateUserResponse response = JsonConvert.DeserializeObject<Models.User.UpdateUserResponse>(responseContent);
+
+                    return responseContent;
+                }
+                else
+                {
+                    throw new InvalidOperationException();
+                }
             }
+        }
+
+        public async Task<String> GetAddressAsync()
+        {
+            Request request = new Request() { id = "1", method = "hdwallet.getAddress" };
+
+            String json = JsonConvert.SerializeObject(request);
+            StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
+            String url = String.Format("{0}", _host);
+
+            return await Get(requestContent, url);
+        }
+
+        public void Dispose()
+        {
+            _httpClient.Dispose();
         }
     }
 }
+
+    public class MetaData
+    {
+        public String Decription { get; set; }
+
+        public DateTime Expires { get; set; }
+    }
+
+    public class Transfer
+    {
+        //13r7hhidTLHo1tpu9aWxCvQx1FgKGbsJPv
+        //public string address { get; set; }
+
+        public Int32 amount { get; set; }
+    }
+    
+

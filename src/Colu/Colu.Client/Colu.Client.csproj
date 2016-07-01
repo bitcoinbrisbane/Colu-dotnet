@@ -30,8 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -45,9 +45,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client.cs" />
+    <Compile Include="Models\Asset.cs" />
+    <Compile Include="Models\GetAddressRequest.cs" />
     <Compile Include="Models\GetAddressResponse.cs" />
-    <Compile Include="Models\Send.cs" />
-    <Compile Include="Models\Settings.cs" />
+    <Compile Include="Models\GetAssetData.cs" />
+    <Compile Include="Models\GetStakeHolderParams.cs" />
+    <Compile Include="Models\GetStakeHoldersRequest.cs" />
+    <Compile Include="Models\IRequest.cs" />
+    <Compile Include="Models\Request.cs" />
+    <Compile Include="Models\SendAssetRequest.cs" />
+    <Compile Include="Models\SendRequest.cs" />
+    <Compile Include="Models\To.cs" />
     <Compile Include="Models\UTXO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

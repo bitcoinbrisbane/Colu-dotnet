@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Colu.Client.Models
+namespace Colu.Client
 {
     public class GetAddressResponse
     {
@@ -10,6 +10,6 @@ namespace Colu.Client.Models
         public String Address { get; set; }
 
         [JsonProperty(PropertyName = "utxos")]
-        public ICollection<UTXO> Utxos { get; set; }
+        public ICollection<Colu.Client.Models.UTXO> Utxos { get; set; }
     }
 }

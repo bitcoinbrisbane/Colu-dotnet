@@ -7,14 +7,41 @@ namespace Colu.Client.Tests
     public class ClientTests
     {
         [TestMethod]
-        public void Should_get_address_info()
+        public async void Should_Get_Asset_Holders()
         {
-            //n3TjZPvivsP5xHgRS5zbs83vcYcqDzC8J4
-            Models.Settings settings = new Models.Settings() { Network = "Testnet" };
-            Client client = new Client(settings);
+            using (ColuClient client = new ColuClient("http://bitcoinaa3.cloudapp.net:8081"))
+            {
+                var address = await client.GetAddressAsync();
 
-            Colu.Client.Models.GetAddressResponse actual = client.GetAddressInfoAsync("n3TjZPvivsP5xHgRS5zbs83vcYcqDzC8J4").Result;
-            Assert.IsNotNull(actual);
+                var stake = new GetStakeHoldersRequest()
+                {
+                    id = "1"
+                };
+
+                stake.Params.AssetId = "Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ";
+                stake.Params.numConfirmations = "0";
+
+                var acutal = await client.GetStakeHoldersAsync(stake);
+            }
+        }
+
+        [TestMethod]
+        public async void Should_Get_HD_Address()
+        {
+            using (ColuClient client = new ColuClient("http://bitcoinaa3.cloudapp.net:8081"))
+            {
+                var address = await client.GetAddressAsync();
+
+                var stake = new GetStakeHoldersRequest()
+                {
+                    id = "1"
+                };
+
+                stake.Params.AssetId = "Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ";
+                stake.Params.numConfirmations = "0";
+
+                var acutal = await client.GetStakeHoldersAsync(stake);
+            }
         }
     }
 }
