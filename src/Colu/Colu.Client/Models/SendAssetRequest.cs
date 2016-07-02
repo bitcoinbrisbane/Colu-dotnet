@@ -14,7 +14,7 @@ namespace Colu.Client
 
         public SendAssetRequest()
         {
-            this.method = "issueAsset";
+            this.Method = "issueAsset";
             this.jsonrpc = "2.0";
             this.to = new List<To>();
         }

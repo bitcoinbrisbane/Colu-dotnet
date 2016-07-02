@@ -10,7 +10,7 @@ namespace Colu.Client
 
         public GetStakeHoldersRequest()
         {
-            this.method = "coloredCoins.getAssetData";
+            this.Method = "coloredCoins.getAssetData";
             this.jsonrpc = "2.0";
             this.id = "1";
 

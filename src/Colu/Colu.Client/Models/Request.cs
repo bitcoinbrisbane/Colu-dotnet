@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace Colu.Client
 {
@@ -6,7 +7,8 @@ namespace Colu.Client
     {
         public String jsonrpc { get; set; }
 
-        public String method { get; set; }
+        [JsonProperty("method")]
+        public String Method { get; set; }
 
         public String id { get; set; }
 

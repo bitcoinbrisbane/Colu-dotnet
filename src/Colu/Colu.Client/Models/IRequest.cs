@@ -6,6 +6,6 @@ namespace Colu.Client
     {
         String jsonrpc { get; set; }
 
-        String method { get; set; }
+        String Method { get; set; }
     }
 }

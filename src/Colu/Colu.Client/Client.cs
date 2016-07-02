@@ -51,13 +51,14 @@ namespace Colu.Client
             }
         }
 
-        public async Task<String> GetAddressAsync(GetAddressRequest request)
+        public async Task<GetAddressResponse> GetAddressAsync(GetAddressRequest request)
         {
             String json = JsonConvert.SerializeObject(request);
             StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
             String url = String.Format("{0}", _host);
 
-            return await Get(requestContent, url);
+            String content = await Get(requestContent, url);
+            return JsonConvert.DeserializeObject<GetAddressResponse>(content);
         }
 
         public async Task<String> SendAssetAsync(SendAssetRequest request)
@@ -87,15 +88,16 @@ namespace Colu.Client
             }
         }
 
-        public async Task<String> GetAddressAsync()
+        public async Task<GetAddressResponse> GetAddressAsync()
         {
-            Request request = new Request() { id = "1", method = "hdwallet.getAddress" };
+            Request request = new Request() { id = "1", Method = "hdwallet.getAddress" };
 
             String json = JsonConvert.SerializeObject(request);
             StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
             String url = String.Format("{0}", _host);
 
-            return await Get(requestContent, url);
+            String result = await Get(requestContent, url);
+            return JsonConvert.DeserializeObject<GetAddressResponse>(result);
         }
 
         public void Dispose()

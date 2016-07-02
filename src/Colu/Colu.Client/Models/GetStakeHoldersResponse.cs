@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Colu.Models
+namespace Colu.Client.Models
 {
-    class Enums
+    public class GetStakeHoldersResponse
     {
     }
 }
