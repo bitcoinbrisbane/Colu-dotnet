@@ -22,17 +22,32 @@ namespace Colu.Client.Tests
         {
             using (ColuClient client = new ColuClient("http://bitcoinaa3.cloudapp.net:8081"))
             {
-                var address = await client.GetAddressAsync();
-
-                var stake = new GetStakeHoldersRequest()
+                var request = new GetStakeHoldersRequest()
                 {
                     id = "1"
                 };
 
-                stake.Params.AssetId = "Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ";
-                stake.Params.numConfirmations = "0";
+                request.Params.AssetId = "Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ";
+                request.Params.numConfirmations = "0";
 
-                var acutal = await client.GetStakeHoldersAsync(stake);
+                var acutal = await client.GetStakeHoldersAsync(request);
+            }
+        }
+
+        [TestMethod]
+        public async Task Should_Issue_Asset()
+        {
+            using (ColuClient client = new ColuClient("http://bitcoinaa3.cloudapp.net:8081"))
+            {
+                var request = new Models.IssueAssetRequest()
+                {
+                    id = "1"
+                };
+
+                //request.Params.AssetId = "Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ";
+                //request.Params.numConfirmations = "0";
+
+                var acutal = await client.IssueAsync(request);
             }
         }
     }

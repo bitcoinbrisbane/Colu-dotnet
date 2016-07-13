@@ -29,7 +29,7 @@ namespace Colu.Client
             return await Get(requestContent, url);
         }
 
-        public async Task<String> IssueAsync(SendRequest request)
+        public async Task<String> IssueAsync(IssueAssetRequest request)
         {
             String json = JsonConvert.SerializeObject(request);
             StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
