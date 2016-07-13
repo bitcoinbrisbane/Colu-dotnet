@@ -28,7 +28,7 @@ namespace Colu.Client.Tests
                 };
 
                 request.Params.AssetId = "Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ";
-                request.Params.numConfirmations = "0";
+                request.Params.NumberConfirmations = "0";
 
                 var acutal = await client.GetStakeHoldersAsync(request);
             }

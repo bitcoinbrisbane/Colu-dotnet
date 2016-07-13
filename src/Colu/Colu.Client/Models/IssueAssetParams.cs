@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +9,16 @@ namespace Colu.Client.Models
 {
     public class IssueAssetParams
     {
-        public Int64 amount { get; set; }
+        [JsonProperty("amount")]
+        public Int64 Amount { get; set; }
 
-        public String issueAddress { get; set; }
+        [JsonProperty("issueAddress")]
+        public String IssueAddress { get; set; }
 
-        public Int64 divisibility { get; set; }
+        [JsonProperty("divisibility")]
+        public Int64 Divisibility { get; set; }
 
-        public Boolean reissueable { get; set; }
+        [JsonProperty("reissueable")]
+        public Boolean Reissueable { get; set; }
     }
 }

@@ -8,6 +8,7 @@ namespace Colu.Client
         [JsonProperty("assetId")]
         public String AssetId { get; set; }
 
-        public String numConfirmations { get; set; }
+        [JsonProperty("numConfirmations")]
+        public String NumberConfirmations { get; set; }
     }
 }

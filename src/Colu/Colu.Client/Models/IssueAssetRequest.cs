@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Colu.Client.Models
 {
-    public class IssueAssetRequest : Request
+    public class IssueAssetRequest : Request, IRequest
     {
         [JsonProperty("params")]
         public IssueAssetParams param { get; set; }
