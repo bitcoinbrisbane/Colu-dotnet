@@ -22,3 +22,8 @@ Response
 
 curl -X POST -i http://bitcoinaa3.cloudapp.net:8081/ -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"issueAsset", "id":"1", "params":{"amount":1,"reissueable":false,"metadata":{"Decription":"Annual Membership","Expires":"0001-01-01T00:00:00"},"transfer":[{"amount":1}],"issueAddress":"1AiuGntRbTZ8At6Qf28seE3BHcj1QRNvww","divisibility":0},"to":[{"address":"1KniEvPee5597uTXzk8T77JoSD12GDfPhu","amount":1}]}'
 
+
+Works
+curl -X POST -i http://bitcoinaa3.cloudapp.net:8081/ -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"issueAsset", "id":"1", "params":{"amount":1,"reissueable":false,"metadata":{"Decription":"Annual Membership","Expires":"0001-01-01T00:00:00"},"transfer":[{"amount":1,"address":"1BH1PZbrwkYQSVvVsFvdJFg7qqtp6Xs3n9"}],"issueAddress":"15rF4harWH9AJ8UPyAmn2Q3WnQ9SD9tdsX","divisibility":0}}'
+
+{"jsonrpc":"2.0","id":"1","result":{"txHex":"0100000001258a0e8d0b9c182bed9e8e8641b8a41a4d5484a93cbcef82066d96e914b9cb1e000000001976a9143530a007feddc1a464ae78b303fe349fa5c4a81188acffffffff03b80b0000000000001976a91470b83cea3179fb3b971e7e44c8b56778f23f96c488ac00000000000000003e6a3c43430201ad009d5b13c7a64b8e8f5f8a9255f705279cb4b79822b903af4ee5e485badf7286932a15f1d392798feabbd1b23a7f3fe13af4cb01000110b80b0000000000001976a9143530a007feddc1a464ae78b303fe349fa5c4a81188ac00000000","assetId":"La37zVgknm8sWfTMzrxKE9bKY8xWAStqHAywhG","coloredOutputIndexes":[0],"financeTxid":"1ecbb914e9966d0682efbc3ca984544d1aa4b841868e9eed2b189c0b8d0e8a25","txid":"acd9c9c47515052f7971009cf7733af83256088fe00d3ff9e455077a6dad3b86","receivingAddresses":[{"amount":1,"address":"1BH1PZbrwkYQSVvVsFvdJFg7qqtp6Xs3n9"}],"issueAddress":"15rF4harWH9AJ8UPyAmn2Q3WnQ9SD9tdsX"}}S
