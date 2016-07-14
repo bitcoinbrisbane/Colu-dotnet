@@ -2,17 +2,17 @@
 using System;
 using System.Collections.Generic;
 
-namespace Colu.Client
+namespace Colu.Client.Models.SendAsset
 {
     //http://documentation.colu.co/#SendAsset36
-    public class SendAssetRequest : Response
+    public class Request : Response
     {
         [JsonProperty("params")]
         public Asset param { get; set; }
 
         public IList<To> to { get; set; }
 
-        public SendAssetRequest()
+        public Request()
         {
             this.Method = "issueAsset";
             this.jsonrpc = "2.0";

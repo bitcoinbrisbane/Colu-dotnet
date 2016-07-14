@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Colu.Client.Models;
+using System;
 using System.Threading.Tasks;
 
 namespace Colu.Client

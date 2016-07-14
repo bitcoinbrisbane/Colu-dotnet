@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace Colu.Client.Models
+namespace Colu.Client.Models.IssueAsset
 {
-    public class IssueAssetParams
+    public class Params
     {
         [JsonProperty("amount")]
         public Int64 Amount { get; set; }

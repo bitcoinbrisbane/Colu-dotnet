@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Colu.Client.Models
+namespace Colu.Client.Models.IssueAsset
 {
-    public class IssueAssetResponse : Response
+    public class MetaData
     {
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Colu.Client
+namespace Colu.Client.Models
 {
     public interface IRequest
     {

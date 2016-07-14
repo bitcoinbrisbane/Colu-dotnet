@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace Colu.Client
+namespace Colu.Client.Models
 {
     public class SendRequest : Response, IRequest
     {

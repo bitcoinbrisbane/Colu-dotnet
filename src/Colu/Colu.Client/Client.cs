@@ -14,7 +14,15 @@ namespace Colu.Client
         private readonly String _host;
         private readonly HttpClient _httpClient;
 
+        private const String MEDIA_TYPE = "application/json";
+
         public ColuClient(String host)
+        {
+            _httpClient = new HttpClient();
+            _host = host;
+        }
+
+        public ColuClient(String host, String username, String password)
         {
             _httpClient = new HttpClient();
             _host = host;
@@ -24,7 +32,7 @@ namespace Colu.Client
         {
             GetAddressRequest request = new GetAddressRequest() { Id = id };
             String json = JsonConvert.SerializeObject(request);
-            StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
+            StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
             String url = String.Format("{0}", _host);
 
             String content = await Get(requestContent, url);
@@ -34,7 +42,7 @@ namespace Colu.Client
         public async Task<GetAddressResponse> GetAddressAsync(GetAddressRequest request)
         {
             String json = JsonConvert.SerializeObject(request);
-            StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
+            StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
             String url = String.Format("{0}", _host);
 
             String content = await Get(requestContent, url);
@@ -44,16 +52,16 @@ namespace Colu.Client
         public async Task<String> GetStakeHoldersAsync(GetStakeHoldersRequest request)
         {
             String json = JsonConvert.SerializeObject(request);
-            StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
+            StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
             String url = String.Format("{0}", _host);
 
             return await Get(requestContent, url);
         }
 
-        public async Task<String> IssueAsync(IssueAssetRequest request)
+        public async Task<String> IssueAsync(Models.IssueAsset.Request request)
         {
             String json = JsonConvert.SerializeObject(request);
-            StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
+            StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
             String url = String.Format("{0}", _host);
 
             using (HttpResponseMessage responseMessage = await _httpClient.PostAsync(url, requestContent))
@@ -72,16 +80,16 @@ namespace Colu.Client
             }
         }
 
-        public async Task<String> SendAssetAsync(SendAssetRequest request)
+        public async Task<String> SendAssetAsync(Models.SendAsset.Request request)
         {
             String json = JsonConvert.SerializeObject(request);
-            StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
+            StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
             String url = String.Format("{0}", _host);
 
             return await Get(requestContent, url);
         }
 
-        private async Task<string> Get(StringContent requestContent, string url)
+        private async Task<String> Get(StringContent requestContent, String url)
         {
             using (HttpResponseMessage responseMessage = await _httpClient.PostAsync(url, requestContent))
             {
@@ -105,20 +113,3 @@ namespace Colu.Client
         }
     }
 }
-
-    public class MetaData
-    {
-        public String Decription { get; set; }
-
-        public DateTime Expires { get; set; }
-    }
-
-    public class Transfer
-    {
-        //13r7hhidTLHo1tpu9aWxCvQx1FgKGbsJPv
-        //public string address { get; set; }
-
-        public Int32 amount { get; set; }
-    }
-    
-

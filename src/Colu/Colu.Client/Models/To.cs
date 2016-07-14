@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace Colu.Client
+namespace Colu.Client.Models
 {
     public class To
     {
@@ -15,7 +15,6 @@ namespace Colu.Client
         public String AssetId { get; set; }
 
         [JsonProperty("amount")]
-        public UInt64 Amount { get; set; } 
-
+        public UInt64 Amount { get; set; }
     }
 }

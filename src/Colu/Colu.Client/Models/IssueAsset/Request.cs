@@ -3,29 +3,29 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Colu.Client.Models
+namespace Colu.Client.Models.IssueAsset
 {
-    public class IssueAssetRequest : Response, IRequest
+    public class Request : Response, IRequest
     {
         [JsonProperty("params")]
-        public IssueAssetParams Param { get; set; }
+        public IssueAsset.Params Param { get; set; }
 
         [JsonProperty("to")]
         public IList<To> to { get; set; }
 
-        public IssueAssetRequest()
+        public Request()
         {
             this.jsonrpc = "2.0";
             this.Method = "issueAsset";
-            this.Param = new IssueAssetParams();
+            this.Param = new IssueAsset.Params();
             this.to = new List<To>();
         }
 
-        public IssueAssetRequest(Int32 n)
+        public Request(Int32 n)
         {
             this.jsonrpc = "2.0";
             this.Method = "issueAsset";
-            this.Param = new IssueAssetParams();
+            this.Param = new IssueAsset.Params();
             this.to = new List<To>(n);
         }
     }

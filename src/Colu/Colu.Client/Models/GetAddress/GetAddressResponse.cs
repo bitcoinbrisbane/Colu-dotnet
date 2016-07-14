@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Colu.Client
+namespace Colu.Client.Models
 {
     public class GetAddressResponse : Response
     {
