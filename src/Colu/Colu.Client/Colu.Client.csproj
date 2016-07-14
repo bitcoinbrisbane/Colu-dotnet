@@ -53,6 +53,7 @@
     <Compile Include="Models\GetStakeHoldersRequest.cs" />
     <Compile Include="Models\GetStakeHoldersResponse.cs" />
     <Compile Include="Models\IRequest.cs" />
+    <Compile Include="Models\IssueAssetMetaData.cs" />
     <Compile Include="Models\IssueAssetRequest.cs" />
     <Compile Include="Models\IssueAssetParams.cs" />
     <Compile Include="Models\Request.cs" />

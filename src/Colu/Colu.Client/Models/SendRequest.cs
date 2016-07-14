@@ -3,18 +3,15 @@ using System;
 
 namespace Colu.Client
 {
-    public class SendRequest
+    public class SendRequest : Request, IRequest
     {
-        public String jsonrpc { get; set; }
-
-        public String method { get; set; }
 
         [JsonProperty("params")]
         public Asset param { get; set; }
 
         public SendRequest()
         {
-            this.method = "issueAsset";
+            this.Method = "issueAsset";
             this.jsonrpc = "2.0";
         }
     }

@@ -1,16 +1,21 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace Colu.Client
 {
     public class To
     {
+        [JsonProperty("address")]
         public String address { get; set; }
 
-        public String phoneNumber { get; set; }
+        [JsonProperty("phoneNumber")]
+        public Int64 PhoneNumber { get; set; }
 
-        public String assetId { get; set; }
+        [JsonProperty("assetId")]
+        public String AssetId { get; set; }
 
-        public UInt64 amount { get; set; } 
+        [JsonProperty("amount")]
+        public UInt64 Amount { get; set; } 
 
     }
 }
