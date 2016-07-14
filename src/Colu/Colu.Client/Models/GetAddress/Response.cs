@@ -2,9 +2,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace Colu.Client.Models
+namespace Colu.Client.Models.GetAddress
 {
-    public class GetAddressResponse : Response
+    public class Response : Colu.Client.Models.Response
     {
         [JsonProperty(PropertyName="result")]
         public String Address { get; set; }

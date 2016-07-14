@@ -28,25 +28,25 @@ namespace Colu.Client
             _host = host;
         }
 
-        public async Task<GetAddressResponse> GetAddressAsync(String id)
+        public async Task<Models.GetAddress.Response> GetAddressAsync(String id)
         {
-            GetAddressRequest request = new GetAddressRequest() { Id = id };
+            Models.GetAddress.Request request = new Models.GetAddress.Request() { Id = id };
             String json = JsonConvert.SerializeObject(request);
             StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
             String url = String.Format("{0}", _host);
 
             String content = await Get(requestContent, url);
-            return JsonConvert.DeserializeObject<GetAddressResponse>(content);
+            return JsonConvert.DeserializeObject<Models.GetAddress.Response>(content);
         }
 
-        public async Task<GetAddressResponse> GetAddressAsync(GetAddressRequest request)
+        public async Task<Models.GetAddress.Response> GetAddressAsync(Models.GetAddress.Request request)
         {
             String json = JsonConvert.SerializeObject(request);
             StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
             String url = String.Format("{0}", _host);
 
             String content = await Get(requestContent, url);
-            return JsonConvert.DeserializeObject<GetAddressResponse>(content);
+            return JsonConvert.DeserializeObject<Models.GetAddress.Response>(content);
         }
 
         public async Task<String> GetStakeHoldersAsync(GetStakeHoldersRequest request)

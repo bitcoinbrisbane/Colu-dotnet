@@ -6,6 +6,6 @@ namespace Colu.Client
 {
     public interface IAddressClient : IDisposable
     {
-        Task<GetAddressResponse> GetAddressAsync(String id);
+        Task<Models.GetAddress.Response> GetAddressAsync(String id);
     }
 }
