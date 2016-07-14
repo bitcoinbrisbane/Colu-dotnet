@@ -10,10 +10,13 @@ namespace Colu.Client.Tests
         [TestMethod]
         public async Task Should_Get_HD_Address()
         {
-            using (ColuClient client = new ColuClient("http://bitcoinaa3.cloudapp.net:8081"))
+            using (IAddressClient client = new ColuClient("http://bitcoinaa3.cloudapp.net:8081"))
             {
-                var response = await client.GetAddressAsync();
+                //var request = new GetAddressRequest() { Id = "1" };
+                var response = await client.GetAddressAsync("1");
+
                 Assert.IsFalse(String.IsNullOrEmpty(response.Address));
+                Assert.AreEqual("1", response.Id);
             }
         }
 
@@ -24,7 +27,7 @@ namespace Colu.Client.Tests
             {
                 var request = new GetStakeHoldersRequest()
                 {
-                    id = "1"
+                    Id = "1"
                 };
 
                 request.Params.AssetId = "Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ";
@@ -33,6 +36,7 @@ namespace Colu.Client.Tests
                 var acutal = await client.GetStakeHoldersAsync(request);
                 Assert.IsNotNull(acutal);
                 Assert.IsTrue(acutal.Length > 0);
+                
             }
         }
 
@@ -43,15 +47,15 @@ namespace Colu.Client.Tests
             {
                 var request = new Models.IssueAssetRequest()
                 {
-                    id = "1"
+                    Id = "1"
                 };
 
                 request.Param.Amount = 1;
                 request.Param.Divisibility = 0;
                 request.Param.Reissueable = false;
-                request.Param.IssueAddress = "15rF4harWH9AJ8UPyAmn2Q3WnQ9SD9tdsX";
-
-                request.to.Add(new To() { PhoneNumber = 61407928417, Amount = 1 });
+                //request.Param.IssueAddress = "15rF4harWH9AJ8UPyAmn2Q3WnQ9SD9tdsX";
+                request.Param.IssueAddress = "mkNCMkfqKJaR5Ex1gjk9rKFqePk95kDVaC";
+                request.to.Add(new To() { PhoneNumber = "61407928417", Amount = 1 });
 
                 //request.Params.AssetId = "Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ";
                 //request.Params.numConfirmations = "0";

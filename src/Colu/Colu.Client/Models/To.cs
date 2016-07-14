@@ -9,7 +9,7 @@ namespace Colu.Client
         public String address { get; set; }
 
         [JsonProperty("phoneNumber")]
-        public Int64 PhoneNumber { get; set; }
+        public String PhoneNumber { get; set; }
 
         [JsonProperty("assetId")]
         public String AssetId { get; set; }

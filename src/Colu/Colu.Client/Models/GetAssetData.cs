@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Colu.Client
 {
-    public class GetAssetData : Request
+    public class GetAssetData : Response
     {
         [JsonProperty("params")]
         public Asset param { get; set; }

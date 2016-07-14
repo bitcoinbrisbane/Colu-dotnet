@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Colu.Client
 {
     //http://documentation.colu.co/#SendAsset36
-    public class SendAssetRequest : Request
+    public class SendAssetRequest : Response
     {
         [JsonProperty("params")]
         public Asset param { get; set; }

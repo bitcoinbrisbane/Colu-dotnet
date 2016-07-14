@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Colu.Client
 {
-    public class ColuClient : IDisposable
+    public class ColuClient : IDisposable, IAddressClient
     {
         private readonly String _host;
         private readonly HttpClient _httpClient;
@@ -18,6 +18,27 @@ namespace Colu.Client
         {
             _httpClient = new HttpClient();
             _host = host;
+        }
+
+        public async Task<GetAddressResponse> GetAddressAsync(String id)
+        {
+            GetAddressRequest request = new GetAddressRequest() { Id = id };
+            String json = JsonConvert.SerializeObject(request);
+            StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
+            String url = String.Format("{0}", _host);
+
+            String content = await Get(requestContent, url);
+            return JsonConvert.DeserializeObject<GetAddressResponse>(content);
+        }
+
+        public async Task<GetAddressResponse> GetAddressAsync(GetAddressRequest request)
+        {
+            String json = JsonConvert.SerializeObject(request);
+            StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
+            String url = String.Format("{0}", _host);
+
+            String content = await Get(requestContent, url);
+            return JsonConvert.DeserializeObject<GetAddressResponse>(content);
         }
 
         public async Task<String> GetStakeHoldersAsync(GetStakeHoldersRequest request)
@@ -51,16 +72,6 @@ namespace Colu.Client
             }
         }
 
-        public async Task<GetAddressResponse> GetAddressAsync(GetAddressRequest request)
-        {
-            String json = JsonConvert.SerializeObject(request);
-            StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
-            String url = String.Format("{0}", _host);
-
-            String content = await Get(requestContent, url);
-            return JsonConvert.DeserializeObject<GetAddressResponse>(content);
-        }
-
         public async Task<String> SendAssetAsync(SendAssetRequest request)
         {
             String json = JsonConvert.SerializeObject(request);
@@ -86,18 +97,6 @@ namespace Colu.Client
                     throw new InvalidOperationException();
                 }
             }
-        }
-
-        public async Task<GetAddressResponse> GetAddressAsync()
-        {
-            Request request = new Request() { id = "1", Method = "hdwallet.getAddress" };
-
-            String json = JsonConvert.SerializeObject(request);
-            StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
-            String url = String.Format("{0}", _host);
-
-            String result = await Get(requestContent, url);
-            return JsonConvert.DeserializeObject<GetAddressResponse>(result);
         }
 
         public void Dispose()

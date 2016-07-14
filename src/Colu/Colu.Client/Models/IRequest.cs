@@ -4,8 +4,8 @@ namespace Colu.Client
 {
     public interface IRequest
     {
-        String jsonrpc { get; set; }
+        String jsonrpc { get; }
 
-        String Method { get; set; }
+        String Method { get; }
     }
 }

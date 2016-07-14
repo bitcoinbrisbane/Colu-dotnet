@@ -3,7 +3,7 @@ using System;
 
 namespace Colu.Client
 {
-    public class SendRequest : Request, IRequest
+    public class SendRequest : Response, IRequest
     {
 
         [JsonProperty("params")]

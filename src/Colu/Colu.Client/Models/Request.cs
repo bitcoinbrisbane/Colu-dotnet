@@ -5,12 +5,13 @@ namespace Colu.Client
 {
     public class Request
     {
-        public String jsonrpc { get; set; }
+        public String jsonrpc { get; private set; }
 
         [JsonProperty("method")]
-        public String Method { get; set; }
+        public String Method { get; internal set; }
 
-        public String id { get; set; }
+        [JsonProperty("id")]
+        public String Id { get; set; }
 
         public Request()
         {

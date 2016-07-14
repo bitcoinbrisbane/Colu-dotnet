@@ -7,7 +7,6 @@ namespace Colu.Client
         public GetAddressRequest()
         {
             this.Method = "hdwallet.getAddress";
-            this.jsonrpc = "2.0";
         }
     }
 }

@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client.cs" />
+    <Compile Include="IAddressClient.cs" />
     <Compile Include="Models\Asset.cs" />
     <Compile Include="Models\GetAddressRequest.cs" />
     <Compile Include="Models\GetAddressResponse.cs" />
@@ -56,6 +57,8 @@
     <Compile Include="Models\IssueAssetMetaData.cs" />
     <Compile Include="Models\IssueAssetRequest.cs" />
     <Compile Include="Models\IssueAssetParams.cs" />
+    <Compile Include="Models\IssueAssetResponse.cs" />
+    <Compile Include="Models\Response.cs" />
     <Compile Include="Models\Request.cs" />
     <Compile Include="Models\SendAssetRequest.cs" />
     <Compile Include="Models\SendRequest.cs" />

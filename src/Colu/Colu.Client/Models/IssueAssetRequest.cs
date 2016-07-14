@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Colu.Client.Models
 {
-    public class IssueAssetRequest : Request, IRequest
+    public class IssueAssetRequest : Response, IRequest
     {
         [JsonProperty("params")]
         public IssueAssetParams Param { get; set; }
@@ -15,6 +15,7 @@ namespace Colu.Client.Models
 
         public IssueAssetRequest()
         {
+            this.jsonrpc = "2.0";
             this.Method = "issueAsset";
             this.Param = new IssueAssetParams();
             this.to = new List<To>();
@@ -22,6 +23,7 @@ namespace Colu.Client.Models
 
         public IssueAssetRequest(Int32 n)
         {
+            this.jsonrpc = "2.0";
             this.Method = "issueAsset";
             this.Param = new IssueAssetParams();
             this.to = new List<To>(n);

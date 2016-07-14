@@ -4,12 +4,9 @@ using System.Collections.Generic;
 
 namespace Colu.Client
 {
-    public class GetAddressResponse
+    public class GetAddressResponse : Response
     {
-        [JsonProperty(PropertyName="address")]
+        [JsonProperty(PropertyName="result")]
         public String Address { get; set; }
-
-        [JsonProperty(PropertyName = "utxos")]
-        public ICollection<Colu.Client.Models.UTXO> Utxos { get; set; }
     }
 }
