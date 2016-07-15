@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace Colu.Client.Models.IssueAsset
+namespace Colu.Models.IssueAsset
 {
     public class Params
     {

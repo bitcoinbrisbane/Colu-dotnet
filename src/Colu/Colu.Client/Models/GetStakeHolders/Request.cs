@@ -1,19 +1,17 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace Colu.Client.Models
+namespace Colu.Models.GetStakeHolders
 {
-    public class GetStakeHoldersRequest : Response, IRequest
+    public class Request : Models.Request, IRequest
     {
         [JsonProperty("params")]
         public GetStakeHolderParams Params { get; set; }
 
-        public GetStakeHoldersRequest()
+        public Request()
         {
             this.Method = "coloredCoins.getAssetData";
-            this.jsonrpc = "2.0";
             this.Id = "1";
-
             this.Params = new GetStakeHolderParams();
         }
     }

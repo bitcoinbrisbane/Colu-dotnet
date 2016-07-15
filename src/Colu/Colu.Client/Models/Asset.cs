@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Colu.Client.Models
+namespace Colu.Models
 {
     public class Asset
     {

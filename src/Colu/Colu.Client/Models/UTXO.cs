@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace Colu.Client.Models
+namespace Colu.Models
 {
     public class UTXO
     {

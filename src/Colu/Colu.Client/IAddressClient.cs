@@ -1,8 +1,8 @@
-﻿using Colu.Client.Models;
+﻿using Colu.Models;
 using System;
 using System.Threading.Tasks;
 
-namespace Colu.Client
+namespace Colu
 {
     public interface IAddressClient : IDisposable
     {

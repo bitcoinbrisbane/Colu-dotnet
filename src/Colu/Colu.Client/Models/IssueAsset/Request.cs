@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Colu.Client.Models.IssueAsset
+namespace Colu.Models.IssueAsset
 {
     public class Request : Response, IRequest
     {

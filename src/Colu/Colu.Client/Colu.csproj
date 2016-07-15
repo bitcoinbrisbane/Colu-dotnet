@@ -7,8 +7,8 @@
     <ProjectGuid>{D2BAFB65-0575-4D9A-A431-810BA964AE0E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Colu.Client</RootNamespace>
-    <AssemblyName>Colu.Client</AssemblyName>
+    <RootNamespace>Colu</RootNamespace>
+    <AssemblyName>Colu</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -52,10 +52,10 @@
     <Compile Include="Models\GetAssetData\Request.cs" />
     <Compile Include="Models\GetAssetMetaData\Request.cs" />
     <Compile Include="Models\GetAssets\Request.cs" />
-    <Compile Include="Models\StakeHolders\GetAssetDataRequest.cs" />
-    <Compile Include="Models\StakeHolders\GetStakeHolderParams.cs" />
-    <Compile Include="Models\StakeHolders\GetStakeHoldersRequest.cs" />
-    <Compile Include="Models\StakeHolders\GetStakeHoldersResponse.cs" />
+    <Compile Include="Models\GetStakeHolders\GetAssetDataRequest.cs" />
+    <Compile Include="Models\GetStakeHolders\GetStakeHolderParams.cs" />
+    <Compile Include="Models\GetStakeHolders\Request.cs" />
+    <Compile Include="Models\GetStakeHolders\Response.cs" />
     <Compile Include="Models\IRequest.cs" />
     <Compile Include="Models\IssueAsset\MetaData.cs" />
     <Compile Include="Models\IssueAsset\Request.cs" />
@@ -65,7 +65,8 @@
     <Compile Include="Models\Response.cs" />
     <Compile Include="Models\Request.cs" />
     <Compile Include="Models\SendAsset\Request.cs" />
-    <Compile Include="Models\SendAsset\SendRequest.cs" />
+    <Compile Include="Models\SendAsset\Response.cs" />
+    <Compile Include="Models\SendAsset\SendAsset.cs" />
     <Compile Include="Models\To.cs" />
     <Compile Include="Models\Transfer.cs" />
     <Compile Include="Models\UTXO.cs" />

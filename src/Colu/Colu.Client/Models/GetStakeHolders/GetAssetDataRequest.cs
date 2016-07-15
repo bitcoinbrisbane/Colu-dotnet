@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Colu.Client.Models
+namespace Colu.Models
 {
     public class GetAssetDataRequest : Response
     {

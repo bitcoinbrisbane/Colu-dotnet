@@ -6,8 +6,8 @@
     <ProjectGuid>{07C66733-837B-4D35-94AA-2964EC2AE422}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Colu.Client.Tests</RootNamespace>
-    <AssemblyName>Colu.Client.Tests</AssemblyName>
+    <RootNamespace>ColuClient.Tests</RootNamespace>
+    <AssemblyName>ColuClient.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -54,9 +54,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Colu.Client\Colu.Client.csproj">
+    <ProjectReference Include="..\Colu.Client\Colu.csproj">
       <Project>{d2bafb65-0575-4d9a-a431-810ba964ae0e}</Project>
-      <Name>Colu.Client</Name>
+      <Name>Colu</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Colu.Client.Models.GetAssetData
+namespace Colu.Models.GetAssetData
 {
     public class Request
     {

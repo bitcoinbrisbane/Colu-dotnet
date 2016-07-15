@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Colu.Models.GetAssetMetaData
+namespace Colu.Models.GetStakeHolders
 {
-    public class Request
+    public class Response
     {
-
     }
 }

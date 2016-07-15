@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace Colu.Client
+namespace Colu.Models
 {
     public class GetStakeHolderParams
     {
