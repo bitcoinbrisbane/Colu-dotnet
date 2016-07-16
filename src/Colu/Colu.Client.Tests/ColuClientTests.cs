@@ -100,5 +100,15 @@ namespace ColuClient.Tests
                 Assert.IsNotNull(acutal);
             }
         }
+
+        [TestMethod]
+        public async Task Should_Get_Address_Info()
+        {
+            using (Client client = new Client("http://bitcoinaa3.cloudapp.net:8081"))
+            {
+                var acutal = await client.GetAddressInfoAsync("mkK8GmN4q5TnPEZkJmY6LVa5i5kimxwNXB");
+                Assert.IsNotNull(acutal);
+            }
+        }
     }
 }

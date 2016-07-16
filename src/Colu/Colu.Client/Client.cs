@@ -50,6 +50,29 @@ namespace Colu
             return JsonConvert.DeserializeObject<Models.GetAddress.Response>(response);
         }
 
+        public async Task<Models.GetAddressInfo.Response> GetAddressInfoAsync(String bitcoinAddress)
+        {
+            Models.GetAddressInfo.Request request = new Models.GetAddressInfo.Request() { Id = "1" };
+            request.Params.Address = bitcoinAddress;
+
+            String json = JsonConvert.SerializeObject(request);
+            StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
+            String url = String.Format("{0}", _host);
+
+            String content = await Get(requestContent, url);
+            return JsonConvert.DeserializeObject<Models.GetAddressInfo.Response> (content);
+        }
+
+        //public async Task<Models.GetAddress.Response> GetAddressAsync(Models.GetAddress.Request request)
+        //{
+        //    String json = JsonConvert.SerializeObject(request);
+        //    StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
+        //    String url = String.Format("{0}", _host);
+
+        //    String response = await Get(requestContent, url);
+        //    return JsonConvert.DeserializeObject<Models.GetAddress.Response>(response);
+        //}
+
         public async Task<Models.GetStakeHolders.Response> GetStakeHoldersAsync(Models.GetStakeHolders.Request request)
         {
             String json = JsonConvert.SerializeObject(request);
@@ -60,7 +83,7 @@ namespace Colu
             return JsonConvert.DeserializeObject<Models.GetStakeHolders.Response>(response);
         }
 
-        public async Task<String> IssueAsync(Models.IssueAsset.Request request)
+        public async Task<Models.IssueAsset.Response> IssueAsync(Models.IssueAsset.Request request)
         {
             String json = JsonConvert.SerializeObject(request);
             StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
@@ -71,9 +94,7 @@ namespace Colu
                 if (responseMessage.IsSuccessStatusCode)
                 {
                     String responseContent = await responseMessage.Content.ReadAsStringAsync();
-                    //Models.User.UpdateUserResponse response = JsonConvert.DeserializeObject<Models.User.UpdateUserResponse>(responseContent);
-
-                    return responseContent;
+                    return JsonConvert.DeserializeObject<Models.IssueAsset.Response>(responseContent);
                 }
                 else
                 {
@@ -82,13 +103,14 @@ namespace Colu
             }
         }
 
-        public async Task<String> SendAssetAsync(Models.SendAsset.Request request)
+        public async Task<Models.SendAsset.Response> SendAssetAsync(Models.SendAsset.Request request)
         {
             String json = JsonConvert.SerializeObject(request);
             StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
             String url = String.Format("{0}", _host);
 
-            return await Get(requestContent, url);
+            String response = await Get(requestContent, url);
+            return JsonConvert.DeserializeObject<Models.SendAsset.Response>(response);
         }
 
         private async Task<String> Get(StringContent requestContent, String url)

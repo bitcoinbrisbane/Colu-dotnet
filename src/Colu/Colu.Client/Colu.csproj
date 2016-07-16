@@ -46,7 +46,10 @@
   <ItemGroup>
     <Compile Include="Client.cs" />
     <Compile Include="IAddressClient.cs" />
+    <Compile Include="Models\GetAddressInfo\AddressParam.cs" />
     <Compile Include="Models\Asset.cs" />
+    <Compile Include="Models\GetAddressInfo\Request.cs" />
+    <Compile Include="Models\GetAddressInfo\Response.cs" />
     <Compile Include="Models\GetAddress\Request.cs" />
     <Compile Include="Models\GetAddress\Response.cs" />
     <Compile Include="Models\GetAssetData\Request.cs" />

@@ -2,7 +2,7 @@
 
 namespace Colu.Models.GetAddress
 {
-    public class Request : Colu.Models.Request, IRequest
+    public class Request : Models.Request, IRequest
     {
         public Request()
         {
