@@ -70,6 +70,35 @@ namespace ColuClient.Tests
         }
 
         [TestMethod]
+        public async Task Should_Issue_And_Transfer_Asset()
+        {
+            using (Client client = new Client("http://bitcoinaa3.cloudapp.net:8081"))
+            {
+                var request = new Colu.Models.IssueAsset.Request()
+                {
+                    Id = "1"
+                };
+
+                request.Param.Amount = 1000;
+                request.Param.Divisibility = 0;
+                request.Param.Reissueable = false;
+                //request.Param.IssueAddress = "1MbLLmDNc3UmZcvDb2Qv128aTdtPHYiP5N";
+                request.Param.IssueAddress = "mftCzxjSGWRRXh5QDKaTpsCXWmGNEtHX3S";
+
+                //IS TO REQUIRED?
+                //request.Param.IssueAddress = "mkNCMkfqKJaR5Ex1gjk9rKFqePk95kDVaC";
+                //mjgNvJhN6g8rkANZZKqpPQDNtrMux5LvT9 random bitaddress address
+                request.Transfer.Add(new Colu.Models.To() { address = "mjgNvJhN6g8rkANZZKqpPQDNtrMux5LvT9", Amount = 1 });
+
+                //request.Params.AssetId = "Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ";
+                //request.Params.numConfirmations = "0";
+
+                var acutal = await client.IssueAsync(request);
+                Assert.IsNotNull(acutal);
+            }
+        }
+
+        [TestMethod]
         public async Task Should_Send_Asset()
         {
             //TEST NET ADDRESS TO RECEIVE
@@ -98,6 +127,30 @@ namespace ColuClient.Tests
                 request.param.to.Add(new Colu.Models.To() { address= "mkK8GmN4q5TnPEZkJmY6LVa5i5kimxwNXB", Amount = 1, AssetId = TESTNET_ASSET_ID });
                 var acutal = await client.SendAssetAsync(request);
                 Assert.IsNotNull(acutal);
+                Assert.IsNotNull(acutal.Result);
+                Assert.IsNotNull(acutal.Result.TxId);
+            }
+        }
+
+        [TestMethod]
+        public async Task Should_Send_Asset_via_Autarky()
+        {
+            const String ASSET_ID = "Ua4jJETD7V9JqELPzJowWDXUbTVh9w83bSc67M";
+            const String ADDRESS = "msP6syfUb97AwfzrYNsw7egaH7BQCpPPKt";
+
+            using (Client client = new Client("http://autarky.cloudapp.net:8081"))
+            {
+                var request = new Colu.Models.SendAsset.Request()
+                {
+                    Id = "1"
+                };
+
+                request.param.from.Add(ADDRESS);
+
+                request.param.to.Add(new Colu.Models.To() { address = "mkK8GmN4q5TnPEZkJmY6LVa5i5kimxwNXB", Amount = 1, AssetId = ASSET_ID });
+                var acutal = await client.SendAssetAsync(request);
+                Assert.IsNotNull(acutal);
+                Assert.IsNotNull(acutal.Result.TxId);
             }
         }
 

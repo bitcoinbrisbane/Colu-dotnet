@@ -10,15 +10,15 @@ namespace Colu.Models.IssueAsset
         [JsonProperty("params")]
         public IssueAsset.Params Param { get; set; }
 
-        [JsonProperty("to")]
-        public IList<To> to { get; set; }
+        [JsonProperty("transfer")]
+        public IList<To> Transfer { get; set; }
 
         public Request()
         {
             this.jsonrpc = "2.0";
             this.Method = "issueAsset";
             this.Param = new IssueAsset.Params();
-            this.to = new List<To>();
+            this.Transfer = new List<To>();
         }
 
         public Request(Int32 n)
@@ -26,7 +26,7 @@ namespace Colu.Models.IssueAsset
             this.jsonrpc = "2.0";
             this.Method = "issueAsset";
             this.Param = new IssueAsset.Params();
-            this.to = new List<To>(n);
+            this.Transfer = new List<To>(n);
         }
     }
 }
