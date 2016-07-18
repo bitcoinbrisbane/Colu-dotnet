@@ -19,7 +19,7 @@ namespace Colu
 
         public Client(String host)
         {
-            _httpClient = new HttpClient();
+            _httpClient = new HttpClient() { Timeout = new TimeSpan(0, 0, 10) };
             _host = host;
         }
 

@@ -15,7 +15,11 @@ namespace Colu.Models
 
         public List<Transfer> transfer { get; set; }
 
-        public String issueAddress { get; set; }
+        [JsonProperty(PropertyName = "issueAddress")]
+        public String IssueAddress { get; set; }
+
+        [JsonProperty(PropertyName = "assetId")]
+        public String AssetId { get; set; }
 
         [JsonProperty(PropertyName = "divisibility")]
         public Int64 Divisibility { get; set; }

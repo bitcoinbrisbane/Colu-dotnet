@@ -63,7 +63,7 @@
     <Compile Include="Models\IRequest.cs" />
     <Compile Include="Models\IssueAsset\MetaData.cs" />
     <Compile Include="Models\IssueAsset\Request.cs" />
-    <Compile Include="Models\IssueAsset\Params.cs" />
+    <Compile Include="Models\IssueAsset\AssetParams.cs" />
     <Compile Include="Models\IssueAsset\Response.cs" />
     <Compile Include="Models\IssueAsset\Result.cs" />
     <Compile Include="Models\Response.cs" />

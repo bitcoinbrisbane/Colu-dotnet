@@ -8,10 +8,12 @@ namespace ColuClient.Tests
     [TestClass]
     public class ColuClientTests
     {
+        private const String HOST = "http://bitcoinaa3.cloudapp.net:8081";
+
         [TestMethod]
         public async Task Should_Get_HD_Address()
         {
-            using (IAddressClient client = new Client("http://bitcoinaa3.cloudapp.net:8081"))
+            using (IAddressClient client = new Client(HOST))
             {
                 //var request = new GetAddressRequest() { Id = "1" };
                 var response = await client.GetAddressAsync("1");
@@ -26,7 +28,7 @@ namespace ColuClient.Tests
         {
             const String BITPOKER_ASSET_ID = "Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ";
 
-            using (Client client = new Client("http://bitcoinaa3.cloudapp.net:8081"))
+            using (Client client = new Client(HOST))
             {
                 var request = new Colu.Models.GetStakeHolders.Request()
                 {
@@ -44,7 +46,7 @@ namespace ColuClient.Tests
         [TestMethod]
         public async Task Should_Issue_Asset()
         {
-            using (Client client = new Client("http://bitcoinaa3.cloudapp.net:8081"))
+            using (Client client = new Client(HOST))
             {
                 var request = new Colu.Models.IssueAsset.Request()
                 {
@@ -70,16 +72,47 @@ namespace ColuClient.Tests
         }
 
         [TestMethod]
+        public async Task Should_Issue_Asset_With_Metadata()
+        {
+            using (Client client = new Client(HOST))
+            {
+                var request = new Colu.Models.IssueAsset.Request()
+                {
+                    Id = Guid.NewGuid().ToString()
+                };
+
+                request.Param.Amount = 1;
+                request.Param.Divisibility = 0;
+                request.Param.Reissueable = false;
+                request.Param.IssueAddress = "1DNjKtYCjrJJgQCkzYqSfrcd8ahzBZXPzR";
+
+                request.Param.MetaData.AssetName = "General Fisheries Permit";
+                request.Param.MetaData.Issuer = "Queensland Government";
+
+
+                //IS TO REQUIRED?
+                //request.Param.IssueAddress = "mkNCMkfqKJaR5Ex1gjk9rKFqePk95kDVaC";
+                //request.to.Add(new Models.To() { PhoneNumber = "61407928417", Amount = 1 });
+
+                //request.Params.AssetId = "Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ";
+                //request.Params.numConfirmations = "0";
+
+                var acutal = await client.IssueAsync(request);
+                Assert.IsNotNull(acutal);
+            }
+        }
+
+        [TestMethod]
         public async Task Should_Issue_And_Transfer_Asset()
         {
-            using (Client client = new Client("http://bitcoinaa3.cloudapp.net:8081"))
+            using (Client client = new Client(HOST))
             {
                 var request = new Colu.Models.IssueAsset.Request()
                 {
                     Id = "1"
                 };
 
-                request.Param.Amount = 1000;
+                request.Param.Amount = 10;
                 request.Param.Divisibility = 0;
                 request.Param.Reissueable = false;
                 //request.Param.IssueAddress = "1MbLLmDNc3UmZcvDb2Qv128aTdtPHYiP5N";
@@ -113,11 +146,11 @@ namespace ColuClient.Tests
 
             const String TEST_NET_ADDRESS = "mftCzxjSGWRRXh5QDKaTpsCXWmGNEtHX3S";
 
-            using (Client client = new Client("http://bitcoinaa3.cloudapp.net:8081"))
+            using (Client client = new Client(HOST))
             {
                 var request = new Colu.Models.SendAsset.Request()
                 {
-                    Id = "1"
+                    Id = Guid.NewGuid().ToString()
                 };
 
                 //request.param.from.Add("1MbLLmDNc3UmZcvDb2Qv128aTdtPHYiP5N");
@@ -125,6 +158,29 @@ namespace ColuClient.Tests
 
                 //request.param.to.Add(new Models.To() { PhoneNumber = "61407928417", Amount = 1, AssetId = ASSET_ID });
                 request.param.to.Add(new Colu.Models.To() { address= "mkK8GmN4q5TnPEZkJmY6LVa5i5kimxwNXB", Amount = 1, AssetId = TESTNET_ASSET_ID });
+                var acutal = await client.SendAssetAsync(request);
+                Assert.IsNotNull(acutal);
+                Assert.IsNotNull(acutal.Result);
+                Assert.IsNotNull(acutal.Result.TxId);
+            }
+        }
+
+        [TestMethod]
+        public async Task Should_Send_Asset_via_Phone()
+        {
+            //fishing permit
+            const String ASSET_ID = "LaAXAraoJfPYRovBtR4DctaLsxiHEcAuBwMWGb";
+
+            using (Client client = new Client(HOST))
+            {
+                var request = new Colu.Models.SendAsset.Request()
+                {
+                    Id = Guid.NewGuid().ToString()
+                };
+
+                request.param.from.Add("1DNjKtYCjrJJgQCkzYqSfrcd8ahzBZXPzR");
+                request.param.to.Add(new Colu.Models.To() { PhoneNumber = "61407928417", Amount = 1, AssetId = ASSET_ID });
+
                 var acutal = await client.SendAssetAsync(request);
                 Assert.IsNotNull(acutal);
                 Assert.IsNotNull(acutal.Result);
@@ -147,7 +203,7 @@ namespace ColuClient.Tests
 
                 request.param.from.Add(ADDRESS);
 
-                request.param.to.Add(new Colu.Models.To() { address = "mkK8GmN4q5TnPEZkJmY6LVa5i5kimxwNXB", Amount = 1, AssetId = ASSET_ID });
+                request.param.to.Add(new Colu.Models.To() { address = "mkXE4k1JqY3fYQ6TJJVGyRze9dM7dE53PD", Amount = 1, AssetId = ASSET_ID });
                 var acutal = await client.SendAssetAsync(request);
                 Assert.IsNotNull(acutal);
                 Assert.IsNotNull(acutal.Result.TxId);
@@ -159,6 +215,7 @@ namespace ColuClient.Tests
         {
             using (Client client = new Client("http://bitcoinaa3.cloudapp.net:8081"))
             {
+                //mkXE4k1JqY3fYQ6TJJVGyRze9dM7dE53PD
                 var acutal = await client.GetAddressInfoAsync("mkK8GmN4q5TnPEZkJmY6LVa5i5kimxwNXB");
                 Assert.IsNotNull(acutal);
             }
