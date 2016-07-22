@@ -11,6 +11,7 @@ namespace Colu.Models.GetAddressInfo
         public Request()
         {
             this.Method = "coloredCoins.getAddressInfo";
+            this.Id = Guid.NewGuid().ToString();
             this.Params = new AddressParam();
         }
     }

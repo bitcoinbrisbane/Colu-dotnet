@@ -9,13 +9,13 @@ namespace ColuClient.Tests
     public class ColuClientTests
     {
         private const String HOST = "http://bitcoinaa3.cloudapp.net:8081";
+        //private const String HOST = "http://autarky.cloudapp.net:8081";
 
         [TestMethod]
         public async Task Should_Get_HD_Address()
         {
             using (IAddressClient client = new Client(HOST))
             {
-                //var request = new GetAddressRequest() { Id = "1" };
                 var response = await client.GetAddressAsync("1");
 
                 Assert.IsFalse(String.IsNullOrEmpty(response.Address));
@@ -32,14 +32,16 @@ namespace ColuClient.Tests
             {
                 var request = new Colu.Models.GetStakeHolders.Request()
                 {
-                    Id = "1"
+                    Id = Guid.NewGuid().ToString()
                 };
                 request.Params.AssetId = BITPOKER_ASSET_ID;
-                request.Params.NumberConfirmations = "0";
+                request.Params.NumberConfirmations = 1;
 
                 var acutal = await client.GetStakeHoldersAsync(request);
                 Assert.IsNotNull(acutal);
-               
+                Assert.IsNotNull(acutal.Result);
+                Assert.AreEqual(BITPOKER_ASSET_ID, acutal.Result.AssetId);
+                Assert.IsTrue(acutal.Result.Holders.Count > 0);
             }
         }
 
@@ -81,7 +83,7 @@ namespace ColuClient.Tests
                     Id = Guid.NewGuid().ToString()
                 };
 
-                request.Param.Amount = 1;
+                request.Param.Amount = 100;
                 request.Param.Divisibility = 0;
                 request.Param.Reissueable = false;
                 request.Param.IssueAddress = "1DNjKtYCjrJJgQCkzYqSfrcd8ahzBZXPzR";
@@ -89,13 +91,28 @@ namespace ColuClient.Tests
                 request.Param.MetaData.AssetName = "General Fisheries Permit";
                 request.Param.MetaData.Issuer = "Queensland Government";
 
+                var acutal = await client.IssueAsync(request);
+                Assert.IsNotNull(acutal);
+            }
+        }
 
-                //IS TO REQUIRED?
-                //request.Param.IssueAddress = "mkNCMkfqKJaR5Ex1gjk9rKFqePk95kDVaC";
-                //request.to.Add(new Models.To() { PhoneNumber = "61407928417", Amount = 1 });
+        [TestMethod]
+        public async Task Should_Issue_Asset_With_Metadata_And_Image()
+        {
+            using (Client client = new Client(HOST))
+            {
+                var request = new Colu.Models.IssueAsset.Request()
+                {
+                    Id = Guid.NewGuid().ToString()
+                };
 
-                //request.Params.AssetId = "Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ";
-                //request.Params.numConfirmations = "0";
+                request.Param.Amount = 100;
+                request.Param.Divisibility = 0;
+                request.Param.Reissueable = false;
+                request.Param.IssueAddress = "1DNjKtYCjrJJgQCkzYqSfrcd8ahzBZXPzR";
+
+                request.Param.MetaData.AssetName = "General Fisheries Permit";
+                request.Param.MetaData.Issuer = "Queensland Government";
 
                 var acutal = await client.IssueAsync(request);
                 Assert.IsNotNull(acutal);
@@ -188,25 +205,47 @@ namespace ColuClient.Tests
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Autarky")]
         public async Task Should_Send_Asset_via_Autarky()
         {
-            const String ASSET_ID = "Ua4jJETD7V9JqELPzJowWDXUbTVh9w83bSc67M";
-            const String ADDRESS = "msP6syfUb97AwfzrYNsw7egaH7BQCpPPKt";
+            const String ASSET_ID = "Ua5QZpRpQLg5YsHY4h9QCCbbo6Z5HJBx6CUJvn";
+            //const String ADDRESS = "mzVuTFivD1bxTNWmYoY5NSB9VY4k1zhKDs";
+            const String FROM_ADDRESS = "mkoffnrkGEMKvswwWXR2LWyXFan68B1UGv";
+            const String TO_ADDRESS = "mvBea3GT2B7iUxESsDioTVcmP492bNzUmf"; //mkXE4k1JqY3fYQ6TJJVGyRze9dM7dE53PD
 
             using (Client client = new Client("http://autarky.cloudapp.net:8081"))
             {
                 var request = new Colu.Models.SendAsset.Request()
                 {
-                    Id = "1"
+                    Id = Guid.NewGuid().ToString()
                 };
 
-                request.param.from.Add(ADDRESS);
+                request.param.from.Add(FROM_ADDRESS);
 
-                request.param.to.Add(new Colu.Models.To() { address = "mkXE4k1JqY3fYQ6TJJVGyRze9dM7dE53PD", Amount = 1, AssetId = ASSET_ID });
+                request.param.to.Add(new Colu.Models.To() { address = TO_ADDRESS, Amount = 100, AssetId = ASSET_ID });
                 var acutal = await client.SendAssetAsync(request);
                 Assert.IsNotNull(acutal);
                 Assert.IsNotNull(acutal.Result.TxId);
+            }
+        }
+
+        [TestMethod, TestCategory("Autarky")]
+        public async Task Should_Issue_Autarky_Asset()
+        {
+            using (Client client = new Client("http://autarky.cloudapp.net:8081"))
+            {
+                var request = new Colu.Models.IssueAsset.Request()
+                {
+                    Id = "1"
+                };
+
+                request.Param.Amount = 1000;
+                request.Param.Divisibility = 2;
+                request.Param.Reissueable = true;
+                request.Param.IssueAddress = "mzVuTFivD1bxTNWmYoY5NSB9VY4k1zhKDs";
+
+                var acutal = await client.IssueAsync(request);
+                Assert.IsNotNull(acutal);
             }
         }
 
@@ -216,7 +255,9 @@ namespace ColuClient.Tests
             using (Client client = new Client("http://bitcoinaa3.cloudapp.net:8081"))
             {
                 //mkXE4k1JqY3fYQ6TJJVGyRze9dM7dE53PD
-                var acutal = await client.GetAddressInfoAsync("mkK8GmN4q5TnPEZkJmY6LVa5i5kimxwNXB");
+                //1DNjKtYCjrJJgQCkzYqSfrcd8ahzBZXPzR - Permits
+                //mkK8GmN4q5TnPEZkJmY6LVa5i5kimxwNXB - Autarky
+                var acutal = await client.GetAddressInfoAsync("1DNjKtYCjrJJgQCkzYqSfrcd8ahzBZXPzR");
                 Assert.IsNotNull(acutal);
             }
         }

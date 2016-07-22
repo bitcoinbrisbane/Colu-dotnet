@@ -9,6 +9,6 @@ namespace Colu.Models
         public String AssetId { get; set; }
 
         [JsonProperty("numConfirmations")]
-        public String NumberConfirmations { get; set; }
+        public Int32 NumberConfirmations { get; set; }
     }
 }

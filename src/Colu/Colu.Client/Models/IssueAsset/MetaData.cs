@@ -11,5 +11,13 @@ namespace Colu.Models.IssueAsset
 
         [JsonProperty("issuer")]
         public String Issuer { get; set; }
+
+        [JsonProperty("urls")]
+        public IList<Url> Urls { get; set; }
+
+        public MetaData()
+        {
+            this.Urls = new List<Url>();
+        }
     }
 }
