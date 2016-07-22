@@ -52,7 +52,7 @@ namespace Colu
 
         public async Task<Models.GetAddressInfo.Response> GetAddressInfoAsync(String bitcoinAddress)
         {
-            Models.GetAddressInfo.Request request = new Models.GetAddressInfo.Request() { Id = "1" };
+            Models.GetAddressInfo.Request request = new Models.GetAddressInfo.Request() { Id = Guid.NewGuid().ToString() };
             request.Params.Address = bitcoinAddress;
 
             String json = JsonConvert.SerializeObject(request);
@@ -73,6 +73,40 @@ namespace Colu
         //    return JsonConvert.DeserializeObject<Models.GetAddress.Response>(response);
         //}
 
+        public async Task<Models.GetAssetData.Response> GetAssetDataAsync(String assetId, Int32 numberOfConfirmations = 0)
+        {
+            Models.GetAssetData.Request request = new Models.GetAssetData.Request()
+            {
+                Id = Guid.NewGuid().ToString()
+            };
+            request.Params.AssetId = assetId;
+
+            String json = JsonConvert.SerializeObject(request);
+            StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
+            String url = String.Format("{0}", _host);
+
+            String content = await Get(requestContent, url);
+            return JsonConvert.DeserializeObject<Models.GetAssetData.Response>(content);
+        }
+
+        public async Task<Models.GetStakeHolders.Response> GetStakeHoldersAsync(String assetId, Int32 numberOfConfirmations)
+        {
+            var request = new Colu.Models.GetStakeHolders.Request()
+            {
+                Id = Guid.NewGuid().ToString()
+            };
+            request.Params.AssetId = assetId;
+            request.Params.NumberConfirmations = numberOfConfirmations;
+
+            String json = JsonConvert.SerializeObject(request);
+            StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
+            String url = String.Format("{0}", _host);
+
+            String response = await Get(requestContent, url);
+            return JsonConvert.DeserializeObject<Models.GetStakeHolders.Response>(response);
+        }
+
+        [Obsolete]
         public async Task<Models.GetStakeHolders.Response> GetStakeHoldersAsync(Models.GetStakeHolders.Request request)
         {
             String json = JsonConvert.SerializeObject(request);

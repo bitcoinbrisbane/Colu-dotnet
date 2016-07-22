@@ -46,6 +46,21 @@ namespace ColuClient.Tests
         }
 
         [TestMethod]
+        public async Task Should_Get_Asset_Holders_2()
+        {
+            const String BITPOKER_ASSET_ID = "Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ";
+
+            using (Client client = new Client(HOST))
+            {
+                var acutal = await client.GetStakeHoldersAsync(BITPOKER_ASSET_ID, 1);
+                Assert.IsNotNull(acutal);
+                Assert.IsNotNull(acutal.Result);
+                Assert.AreEqual(BITPOKER_ASSET_ID, acutal.Result.AssetId);
+                Assert.IsTrue(acutal.Result.Holders.Count > 0);
+            }
+        }
+
+        [TestMethod]
         public async Task Should_Issue_Asset()
         {
             using (Client client = new Client(HOST))
@@ -258,6 +273,16 @@ namespace ColuClient.Tests
                 //1DNjKtYCjrJJgQCkzYqSfrcd8ahzBZXPzR - Permits
                 //mkK8GmN4q5TnPEZkJmY6LVa5i5kimxwNXB - Autarky
                 var acutal = await client.GetAddressInfoAsync("1DNjKtYCjrJJgQCkzYqSfrcd8ahzBZXPzR");
+                Assert.IsNotNull(acutal);
+            }
+        }
+
+        [TestMethod]
+        public async Task Should_Get_Asset_Data()
+        {
+            using (Client client = new Client("http://bitcoinaa3.cloudapp.net:8081"))
+            {
+                var acutal = await client.GetAssetDataAsync("La61G4yCFETSbja4BC3QfKXmM3GUVu3eGHh3bn");
                 Assert.IsNotNull(acutal);
             }
         }

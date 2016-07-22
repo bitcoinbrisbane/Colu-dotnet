@@ -53,6 +53,7 @@
     <Compile Include="Models\GetAddressInfo\Result.cs" />
     <Compile Include="Models\GetAddress\Request.cs" />
     <Compile Include="Models\GetAddress\Response.cs" />
+    <Compile Include="Models\GetAssetData\GetAddressDataParams.cs" />
     <Compile Include="Models\GetAssetData\Request.cs" />
     <Compile Include="Models\GetAssetData\Response.cs" />
     <Compile Include="Models\GetAssetData\Result.cs" />
