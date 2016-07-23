@@ -121,13 +121,21 @@ namespace ColuClient.Tests
                     Id = Guid.NewGuid().ToString()
                 };
 
-                request.Param.Amount = 100;
+                request.Param.Amount = 1;
                 request.Param.Divisibility = 0;
                 request.Param.Reissueable = false;
                 request.Param.IssueAddress = "1DNjKtYCjrJJgQCkzYqSfrcd8ahzBZXPzR";
 
                 request.Param.MetaData.AssetName = "General Fisheries Permit";
                 request.Param.MetaData.Issuer = "Queensland Government";
+
+                var iconUrl = new Colu.Models.IssueAsset.Url()
+                {
+                    Name = "Logo",
+                    MimeType = "image/png",
+                    url = "https://blockchainpermits.azurewebsites.net/images/Fishing-Licence2.png"
+                };
+                request.Param.MetaData.Urls.Add(iconUrl);
 
                 var acutal = await client.IssueAsync(request);
                 Assert.IsNotNull(acutal);

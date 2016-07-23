@@ -14,8 +14,8 @@ namespace Colu.Models.IssueAsset
 
         public String url { get; set; }
 
-        [JsonProperty("mineType")]
-        public String MineType { get; set; }
+        [JsonProperty("mimeType")]
+        public String MimeType { get; set; }
 
         [JsonProperty("dataHash")]
         public String DataHash { get; set; }
