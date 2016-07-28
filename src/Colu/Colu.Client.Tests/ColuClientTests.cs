@@ -16,10 +16,11 @@ namespace ColuClient.Tests
         {
             using (IAddressClient client = new Client(HOST))
             {
-                var response = await client.GetAddressAsync("1");
+                String id = Guid.NewGuid().ToString();
+                var response = await client.GetAddressAsync(id);
 
                 Assert.IsFalse(String.IsNullOrEmpty(response.Address));
-                Assert.AreEqual("1", response.Id);
+                Assert.AreEqual(id, response.Id);
             }
         }
 
@@ -67,7 +68,7 @@ namespace ColuClient.Tests
             {
                 var request = new Colu.Models.IssueAsset.Request()
                 {
-                    Id = "1"
+                    Id = Guid.NewGuid().ToString()
                 };
 
                 request.Param.Amount = 1000;
@@ -121,17 +122,17 @@ namespace ColuClient.Tests
                     Id = Guid.NewGuid().ToString()
                 };
 
-                request.Param.Amount = 1;
+                request.Param.Amount = 10;
                 request.Param.Divisibility = 0;
                 request.Param.Reissueable = false;
-                request.Param.IssueAddress = "1DNjKtYCjrJJgQCkzYqSfrcd8ahzBZXPzR";
+                request.Param.IssueAddress = "192Qdmz576DugRecfECXJrpHojuBguzip6"; //"1DNjKtYCjrJJgQCkzYqSfrcd8ahzBZXPzR";
 
                 request.Param.MetaData.AssetName = "General Fisheries Permit";
                 request.Param.MetaData.Issuer = "Queensland Government";
 
                 var iconUrl = new Colu.Models.IssueAsset.Url()
                 {
-                    Name = "Logo",
+                    Name = "icon",
                     MimeType = "image/png",
                     url = "https://blockchainpermits.azurewebsites.net/images/Fishing-Licence2.png"
                 };
@@ -149,7 +150,7 @@ namespace ColuClient.Tests
             {
                 var request = new Colu.Models.IssueAsset.Request()
                 {
-                    Id = "1"
+                    Id = Guid.NewGuid().ToString()
                 };
 
                 request.Param.Amount = 10;
@@ -259,7 +260,7 @@ namespace ColuClient.Tests
             {
                 var request = new Colu.Models.IssueAsset.Request()
                 {
-                    Id = "1"
+                    Id = Guid.NewGuid().ToString()
                 };
 
                 request.Param.Amount = 1000;

@@ -29,6 +29,11 @@ namespace Colu
             _host = host;
         }
 
+        /// <summary>
+        /// Get a HD address
+        /// </summary>
+        /// <param name="id">Request id</param>
+        /// <returns></returns>
         public async Task<Colu.Models.GetAddress.Response> GetAddressAsync(String id)
         {
             Colu.Models.GetAddress.Request request = new Colu.Models.GetAddress.Request() { Id = id };
@@ -48,6 +53,16 @@ namespace Colu
 
             String response = await Get(requestContent, url);
             return JsonConvert.DeserializeObject<Models.GetAddress.Response>(response);
+        }
+
+        public async Task<Decimal> GetAddressBalanceAsync(String id, String bitcoinAddress, String assetId, Int32 numberOfConfirmations = 0)
+        {
+            var addressInfo = await GetAddressInfoAsync(bitcoinAddress);
+
+            IEnumerable<Asset> assets = addressInfo.Result.Utxos.SelectMany(u => u.Assets).Where(u => u.AssetId == assetId);
+            var total = assets.Sum(a => a.Amount);
+
+            return total;
         }
 
         public async Task<Models.GetAddressInfo.Response> GetAddressInfoAsync(String bitcoinAddress)
