@@ -15,6 +15,9 @@ namespace Colu.Models.IssueAsset
         [JsonProperty("urls")]
         public IList<Url> Urls { get; set; }
 
+        [JsonProperty("verification")]
+        public Verification Verification { get; set; }
+
         public MetaData()
         {
             this.Urls = new List<Url>();

@@ -8,13 +8,25 @@ namespace ColuClient.Tests
     [TestClass]
     public class ColuClientTests
     {
-        private const String HOST = "http://bitcoinaa3.cloudapp.net:8081";
-        //private const String HOST = "http://autarky.cloudapp.net:8081";
+        //private const String HOST = "http://bitcoinaa3.cloudapp.net:8081";
+        private const String HOST = "http://autarky.cloudapp.net:8081";
+        private const String HOME_HOST = "http://101.165.103.43:8081";
+
+        [TestMethod]
+        public async Task Should_Get_Private_Seed()
+        {
+            using (Client client = new Client(HOME_HOST))
+            {
+                var response = await client.GetPrivateSeed();
+
+                Assert.IsFalse(String.IsNullOrEmpty(response.Result));
+            }
+        }
 
         [TestMethod]
         public async Task Should_Get_HD_Address()
         {
-            using (IAddressClient client = new Client(HOST))
+            using (IAddressClient client = new Client(HOME_HOST))
             {
                 String id = Guid.NewGuid().ToString();
                 var response = await client.GetAddressAsync(id);
@@ -137,6 +149,31 @@ namespace ColuClient.Tests
                     url = "https://blockchainpermits.azurewebsites.net/images/Fishing-Licence2.png"
                 };
                 request.Param.MetaData.Urls.Add(iconUrl);
+
+                var acutal = await client.IssueAsync(request);
+                Assert.IsNotNull(acutal);
+            }
+        }
+
+        //mjD34XbQWnccNrfPs4G1pEJZr8mjKhS8A2
+        [TestMethod]
+        public async Task Should_Issue_Asset_With_Metadata_And_Verification()
+        {
+            using (Client client = new Client(HOST))
+            {
+                var request = new Colu.Models.IssueAsset.Request()
+                {
+                    Id = Guid.NewGuid().ToString()
+                };
+
+                request.Param.Amount = 1;
+                request.Param.Divisibility = 0;
+                request.Param.Reissueable = false;
+                request.Param.IssueAddress = "mjD34XbQWnccNrfPs4G1pEJZr8mjKhS8A2";
+
+                request.Param.MetaData.AssetName = "Test Bitpoker";
+                request.Param.MetaData.Verification = new Colu.Models.IssueAsset.Verification();
+                request.Param.MetaData.Verification.Domain = new Colu.Models.IssueAsset.Domain() { url = "https://www.bitpoker.io/assets.txt" };
 
                 var acutal = await client.IssueAsync(request);
                 Assert.IsNotNull(acutal);

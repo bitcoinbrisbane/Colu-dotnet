@@ -29,6 +29,17 @@ namespace Colu
             _host = host;
         }
 
+        public async Task<Models.GetPrivateSeed.Response> GetPrivateSeed()
+        {
+            Models.GetPrivateSeed.Request request = new Models.GetPrivateSeed.Request();
+            String json = JsonConvert.SerializeObject(request);
+            StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
+            String url = String.Format("{0}", _host);
+
+            String content = await Get(requestContent, url);
+            return JsonConvert.DeserializeObject<Models.GetPrivateSeed.Response>(content);
+        }
+
         /// <summary>
         /// Get a HD address
         /// </summary>
@@ -36,7 +47,7 @@ namespace Colu
         /// <returns></returns>
         public async Task<Colu.Models.GetAddress.Response> GetAddressAsync(String id)
         {
-            Colu.Models.GetAddress.Request request = new Colu.Models.GetAddress.Request() { Id = id };
+            Models.GetAddress.Request request = new Models.GetAddress.Request() { Id = id };
             String json = JsonConvert.SerializeObject(request);
             StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
             String url = String.Format("{0}", _host);

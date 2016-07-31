@@ -59,6 +59,8 @@
     <Compile Include="Models\GetAssetData\Result.cs" />
     <Compile Include="Models\GetAssetMetaData\Request.cs" />
     <Compile Include="Models\GetAssets\Request.cs" />
+    <Compile Include="Models\GetPrivateSeed\Request.cs" />
+    <Compile Include="Models\GetPrivateSeed\Response.cs" />
     <Compile Include="Models\GetStakeHolders\GetAssetDataRequest.cs" />
     <Compile Include="Models\GetStakeHolders\GetStakeHolderParams.cs" />
     <Compile Include="Models\GetStakeHolders\Holder.cs" />
@@ -66,12 +68,14 @@
     <Compile Include="Models\GetStakeHolders\Response.cs" />
     <Compile Include="Models\GetStakeHolders\Result.cs" />
     <Compile Include="Models\IRequest.cs" />
+    <Compile Include="Models\IssueAsset\Domain.cs" />
     <Compile Include="Models\IssueAsset\MetaData.cs" />
     <Compile Include="Models\IssueAsset\Request.cs" />
     <Compile Include="Models\IssueAsset\AssetParams.cs" />
     <Compile Include="Models\IssueAsset\Response.cs" />
     <Compile Include="Models\IssueAsset\Result.cs" />
     <Compile Include="Models\IssueAsset\Url.cs" />
+    <Compile Include="Models\IssueAsset\Verification.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="Models\Request.cs" />
     <Compile Include="Models\SendAsset\Request.cs" />
