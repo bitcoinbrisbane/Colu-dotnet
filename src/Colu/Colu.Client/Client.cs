@@ -89,15 +89,30 @@ namespace Colu
             return JsonConvert.DeserializeObject<Models.GetAddressInfo.Response> (content);
         }
 
-        //public async Task<Models.GetAddress.Response> GetAddressAsync(Models.GetAddress.Request request)
-        //{
-        //    String json = JsonConvert.SerializeObject(request);
-        //    StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
-        //    String url = String.Format("{0}", _host);
+        public async Task<Models.GetAssets.Response> GetAssetsAsync()
+        {
+            Models.GetAssets.Request request = new Models.GetAssets.Request()
+            {
+                Id = Guid.NewGuid().ToString()
+            };
 
-        //    String response = await Get(requestContent, url);
-        //    return JsonConvert.DeserializeObject<Models.GetAddress.Response>(response);
-        //}
+            String json = JsonConvert.SerializeObject(request);
+            StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
+            String url = String.Format("{0}", _host);
+
+            using (HttpResponseMessage responseMessage = await _httpClient.PostAsync(url, requestContent))
+            {
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    String responseContent = await responseMessage.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<Models.GetAssets.Response>(responseContent);
+                }
+                else
+                {
+                    throw new InvalidOperationException();
+                }
+            }
+        }
 
         public async Task<Models.GetAssetData.Response> GetAssetDataAsync(String assetId, Int32 numberOfConfirmations = 0)
         {

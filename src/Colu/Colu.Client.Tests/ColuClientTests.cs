@@ -8,8 +8,8 @@ namespace ColuClient.Tests
     [TestClass]
     public class ColuClientTests
     {
-        //private const String HOST = "http://bitcoinaa3.cloudapp.net:8081";
-        private const String HOST = "http://autarky.cloudapp.net:8081";
+        private const String MAINNET_HOST = "http://bitcoinaa3.cloudapp.net:8081";
+        private const String TESTNET_HOST = "http://autarky.cloudapp.net:8081";
         private const String HOME_HOST = "http://101.165.103.43:8081";
 
         [TestMethod]
@@ -26,7 +26,7 @@ namespace ColuClient.Tests
         [TestMethod]
         public async Task Should_Get_HD_Address()
         {
-            using (IAddressClient client = new Client(HOME_HOST))
+            using (IAddressClient client = new Client(MAINNET_HOST))
             {
                 String id = Guid.NewGuid().ToString();
                 var response = await client.GetAddressAsync(id);
@@ -41,7 +41,7 @@ namespace ColuClient.Tests
         {
             const String BITPOKER_ASSET_ID = "Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ";
 
-            using (Client client = new Client(HOST))
+            using (Client client = new Client(TESTNET_HOST))
             {
                 var request = new Colu.Models.GetStakeHolders.Request()
                 {
@@ -63,7 +63,7 @@ namespace ColuClient.Tests
         {
             const String BITPOKER_ASSET_ID = "Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ";
 
-            using (Client client = new Client(HOST))
+            using (Client client = new Client(TESTNET_HOST))
             {
                 var acutal = await client.GetStakeHoldersAsync(BITPOKER_ASSET_ID, 1);
                 Assert.IsNotNull(acutal);
@@ -76,7 +76,7 @@ namespace ColuClient.Tests
         [TestMethod]
         public async Task Should_Issue_Asset()
         {
-            using (Client client = new Client(HOST))
+            using (Client client = new Client(TESTNET_HOST))
             {
                 var request = new Colu.Models.IssueAsset.Request()
                 {
@@ -104,7 +104,7 @@ namespace ColuClient.Tests
         [TestMethod]
         public async Task Should_Issue_Asset_With_Metadata()
         {
-            using (Client client = new Client(HOST))
+            using (Client client = new Client(TESTNET_HOST))
             {
                 var request = new Colu.Models.IssueAsset.Request()
                 {
@@ -127,7 +127,7 @@ namespace ColuClient.Tests
         [TestMethod]
         public async Task Should_Issue_Asset_With_Metadata_And_Image()
         {
-            using (Client client = new Client(HOST))
+            using (Client client = new Client(TESTNET_HOST))
             {
                 var request = new Colu.Models.IssueAsset.Request()
                 {
@@ -155,11 +155,10 @@ namespace ColuClient.Tests
             }
         }
 
-        //mjD34XbQWnccNrfPs4G1pEJZr8mjKhS8A2
         [TestMethod]
         public async Task Should_Issue_Asset_With_Metadata_And_Verification()
         {
-            using (Client client = new Client(HOST))
+            using (Client client = new Client(TESTNET_HOST))
             {
                 var request = new Colu.Models.IssueAsset.Request()
                 {
@@ -183,7 +182,7 @@ namespace ColuClient.Tests
         [TestMethod]
         public async Task Should_Issue_And_Transfer_Asset()
         {
-            using (Client client = new Client(HOST))
+            using (Client client = new Client(TESTNET_HOST))
             {
                 var request = new Colu.Models.IssueAsset.Request()
                 {
@@ -212,29 +211,18 @@ namespace ColuClient.Tests
         [TestMethod]
         public async Task Should_Send_Asset()
         {
-            //TEST NET ADDRESS TO RECEIVE
-            //91i8uCM3dbdCQfxFnkZURTkvsf5vS3rPu7MPDQ3c3LgUBmi26Y6
-            //mkK8GmN4q5TnPEZkJmY6LVa5i5kimxwNXB
-
-            //const String BITPOKER_ISSUANCE_ADDRESS = "1JDMS9JbAfnpi8FD24ksQMjS9rRCLLpScM";
-            //const String BITPOKER_ASSET_ID = "Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ";
-
-            const String ASSET_ID = "La6Dvxak74TyB77RxHQt1ciFqZAESXMYHHBKYx";
             const String TESTNET_ASSET_ID = "La7xWL4k6mr5h5Yi8p3YmN3oxaKPn7x8Ub3YUG";
-
             const String TEST_NET_ADDRESS = "mftCzxjSGWRRXh5QDKaTpsCXWmGNEtHX3S";
 
-            using (Client client = new Client(HOST))
+            using (Client client = new Client(TESTNET_HOST))
             {
                 var request = new Colu.Models.SendAsset.Request()
                 {
                     Id = Guid.NewGuid().ToString()
                 };
 
-                //request.param.from.Add("1MbLLmDNc3UmZcvDb2Qv128aTdtPHYiP5N");
                 request.param.from.Add(TEST_NET_ADDRESS);
 
-                //request.param.to.Add(new Models.To() { PhoneNumber = "61407928417", Amount = 1, AssetId = ASSET_ID });
                 request.param.to.Add(new Colu.Models.To() { address= "mkK8GmN4q5TnPEZkJmY6LVa5i5kimxwNXB", Amount = 1, AssetId = TESTNET_ASSET_ID });
                 var acutal = await client.SendAssetAsync(request);
                 Assert.IsNotNull(acutal);
@@ -249,7 +237,7 @@ namespace ColuClient.Tests
             //fishing permit
             const String ASSET_ID = "LaAXAraoJfPYRovBtR4DctaLsxiHEcAuBwMWGb";
 
-            using (Client client = new Client(HOST))
+            using (Client client = new Client(TESTNET_HOST))
             {
                 var request = new Colu.Models.SendAsset.Request()
                 {
@@ -266,15 +254,14 @@ namespace ColuClient.Tests
             }
         }
 
-        [TestMethod, TestCategory("Autarky")]
+        [TestMethod, TestCategory("Testnet")]
         public async Task Should_Send_Asset_via_Autarky()
         {
             const String ASSET_ID = "Ua5QZpRpQLg5YsHY4h9QCCbbo6Z5HJBx6CUJvn";
-            //const String ADDRESS = "mzVuTFivD1bxTNWmYoY5NSB9VY4k1zhKDs";
             const String FROM_ADDRESS = "mkoffnrkGEMKvswwWXR2LWyXFan68B1UGv";
-            const String TO_ADDRESS = "mvBea3GT2B7iUxESsDioTVcmP492bNzUmf"; //mkXE4k1JqY3fYQ6TJJVGyRze9dM7dE53PD
+            const String TO_ADDRESS = "mvBea3GT2B7iUxESsDioTVcmP492bNzUmf";
 
-            using (Client client = new Client("http://autarky.cloudapp.net:8081"))
+            using (Client client = new Client(TESTNET_HOST))
             {
                 var request = new Colu.Models.SendAsset.Request()
                 {
@@ -290,10 +277,10 @@ namespace ColuClient.Tests
             }
         }
 
-        [TestMethod, TestCategory("Autarky")]
+        [TestMethod, TestCategory("Testnet")]
         public async Task Should_Issue_Autarky_Asset()
         {
-            using (Client client = new Client("http://autarky.cloudapp.net:8081"))
+            using (Client client = new Client(TESTNET_HOST))
             {
                 var request = new Colu.Models.IssueAsset.Request()
                 {
@@ -313,7 +300,7 @@ namespace ColuClient.Tests
         [TestMethod]
         public async Task Should_Get_Address_Info()
         {
-            using (Client client = new Client("http://bitcoinaa3.cloudapp.net:8081"))
+            using (Client client = new Client(MAINNET_HOST))
             {
                 //mkXE4k1JqY3fYQ6TJJVGyRze9dM7dE53PD
                 //1DNjKtYCjrJJgQCkzYqSfrcd8ahzBZXPzR - Permits
@@ -326,9 +313,19 @@ namespace ColuClient.Tests
         [TestMethod]
         public async Task Should_Get_Asset_Data()
         {
-            using (Client client = new Client("http://bitcoinaa3.cloudapp.net:8081"))
+            using (Client client = new Client(MAINNET_HOST))
             {
                 var acutal = await client.GetAssetDataAsync("La61G4yCFETSbja4BC3QfKXmM3GUVu3eGHh3bn");
+                Assert.IsNotNull(acutal);
+            }
+        }
+
+        [TestMethod]
+        public async Task Should_Get_Assets()
+        {
+            using (Client client = new Client("http://bitcoinaa3.cloudapp.net:8081"))
+            {
+                var acutal = await client.GetAssetsAsync();
                 Assert.IsNotNull(acutal);
             }
         }
