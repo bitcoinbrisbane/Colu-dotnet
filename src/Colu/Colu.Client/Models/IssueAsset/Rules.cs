@@ -1,9 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Colu.Models.IssueAsset
 {
@@ -12,6 +8,13 @@ namespace Colu.Models.IssueAsset
         [JsonProperty("version")]
         public Int32 Version { get; set; }
 
-        public Decimal Fees { get; set; }
+        [JsonProperty("fees")]
+        public Fee Fees { get; set; }
+
+        [JsonProperty("expiration")]
+        public Expiration Expiration { get; set; }
+
+        [JsonProperty("callback")]
+        public Object CallBack { get; set; }
     }
 }

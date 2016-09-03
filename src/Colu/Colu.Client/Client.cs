@@ -36,7 +36,7 @@ namespace Colu
             StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
             String url = String.Format("{0}", _host);
 
-            String content = await Get(requestContent, url);
+            String content = await Post(requestContent, url);
             return JsonConvert.DeserializeObject<Models.GetPrivateSeed.Response>(content);
         }
 
@@ -52,7 +52,7 @@ namespace Colu
             StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
             String url = String.Format("{0}", _host);
 
-            String content = await Get(requestContent, url);
+            String content = await Post(requestContent, url);
             return JsonConvert.DeserializeObject<Models.GetAddress.Response>(content);
         }
 
@@ -62,7 +62,7 @@ namespace Colu
             StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
             String url = String.Format("{0}", _host);
 
-            String response = await Get(requestContent, url);
+            String response = await Post(requestContent, url);
             return JsonConvert.DeserializeObject<Models.GetAddress.Response>(response);
         }
 
@@ -85,7 +85,7 @@ namespace Colu
             StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
             String url = String.Format("{0}", _host);
 
-            String content = await Get(requestContent, url);
+            String content = await Post(requestContent, url);
             return JsonConvert.DeserializeObject<Models.GetAddressInfo.Response> (content);
         }
 
@@ -100,18 +100,8 @@ namespace Colu
             StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
             String url = String.Format("{0}", _host);
 
-            using (HttpResponseMessage responseMessage = await _httpClient.PostAsync(url, requestContent))
-            {
-                if (responseMessage.IsSuccessStatusCode)
-                {
-                    String responseContent = await responseMessage.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<Models.GetAssets.Response>(responseContent);
-                }
-                else
-                {
-                    throw new InvalidOperationException();
-                }
-            }
+            String response = await Post(requestContent, url);
+            return JsonConvert.DeserializeObject<Models.GetAssets.Response>(response);
         }
 
         public async Task<Models.GetAssetData.Response> GetAssetDataAsync(String assetId, Int32 numberOfConfirmations = 0)
@@ -126,8 +116,8 @@ namespace Colu
             StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
             String url = String.Format("{0}", _host);
 
-            String content = await Get(requestContent, url);
-            return JsonConvert.DeserializeObject<Models.GetAssetData.Response>(content);
+            String response = await Post(requestContent, url);
+            return JsonConvert.DeserializeObject<Models.GetAssetData.Response>(response);
         }
 
         public async Task<Models.GetStakeHolders.Response> GetStakeHoldersAsync(String assetId, Int32 numberOfConfirmations)
@@ -143,7 +133,7 @@ namespace Colu
             StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
             String url = String.Format("{0}", _host);
 
-            String response = await Get(requestContent, url);
+            String response = await Post(requestContent, url);
             return JsonConvert.DeserializeObject<Models.GetStakeHolders.Response>(response);
         }
 
@@ -154,7 +144,7 @@ namespace Colu
             StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
             String url = String.Format("{0}", _host);
 
-            String response = await Get(requestContent, url);
+            String response = await Post(requestContent, url);
             return JsonConvert.DeserializeObject<Models.GetStakeHolders.Response>(response);
         }
 
@@ -184,19 +174,17 @@ namespace Colu
             StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
             String url = String.Format("{0}", _host);
 
-            String response = await Get(requestContent, url);
+            String response = await Post(requestContent, url);
             return JsonConvert.DeserializeObject<Models.SendAsset.Response>(response);
         }
 
-        private async Task<String> Get(StringContent requestContent, String url)
+        private async Task<String> Post(StringContent requestContent, String url)
         {
             using (HttpResponseMessage responseMessage = await _httpClient.PostAsync(url, requestContent))
             {
                 if (responseMessage.IsSuccessStatusCode)
                 {
                     String responseContent = await responseMessage.Content.ReadAsStringAsync();
-                    //Models.User.UpdateUserResponse response = JsonConvert.DeserializeObject<Models.User.UpdateUserResponse>(responseContent);
-
                     return responseContent;
                 }
                 else

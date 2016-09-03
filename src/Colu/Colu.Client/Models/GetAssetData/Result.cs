@@ -14,5 +14,8 @@ namespace Colu.Models.GetAssetData
 
         [JsonProperty("assetTotalAmount")]
         public Int64 AssetTotalAmount { get; set; }
+
+        [JsonProperty("assetData")]
+        public IEnumerable<AssetData> AssetData { get; set; }
     }
 }

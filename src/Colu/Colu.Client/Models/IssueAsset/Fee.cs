@@ -1,12 +1,14 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Colu.Models.IssueAsset
 {
     public class Fee
     {
+        [JsonProperty("locked")]
+        public Boolean Locked { get; set; }
+
+        public IList<Item> Item { get; set; }
     }
 }

@@ -13,8 +13,8 @@ namespace Colu.Models.IssueAsset
         [JsonProperty("transfer")]
         public IList<To> Transfer { get; set; }
 
-        [JsonProperty("experation")]
-        public Experation Experation { get; set; }
+        [JsonProperty("rules")]
+        public Rules Rules { get; set; }
 
         [JsonProperty("minters")]
         public IList<Minters> Minters { get; set; }

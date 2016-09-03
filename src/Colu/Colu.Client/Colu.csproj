@@ -53,6 +53,7 @@
     <Compile Include="Models\GetAddressInfo\Result.cs" />
     <Compile Include="Models\GetAddress\Request.cs" />
     <Compile Include="Models\GetAddress\Response.cs" />
+    <Compile Include="Models\GetAssetData\AssetData.cs" />
     <Compile Include="Models\GetAssetData\GetAddressDataParams.cs" />
     <Compile Include="Models\GetAssetData\Request.cs" />
     <Compile Include="Models\GetAssetData\Response.cs" />
@@ -70,9 +71,10 @@
     <Compile Include="Models\GetStakeHolders\Result.cs" />
     <Compile Include="Models\IRequest.cs" />
     <Compile Include="Models\IssueAsset\Domain.cs" />
-    <Compile Include="Models\IssueAsset\Experation.cs" />
+    <Compile Include="Models\IssueAsset\Expiration.cs" />
     <Compile Include="Models\IssueAsset\Fee.cs" />
     <Compile Include="Models\IssueAsset\Holders.cs" />
+    <Compile Include="Models\IssueAsset\Item.cs" />
     <Compile Include="Models\IssueAsset\MetaData.cs" />
     <Compile Include="Models\IssueAsset\Minters.cs" />
     <Compile Include="Models\IssueAsset\Request.cs" />

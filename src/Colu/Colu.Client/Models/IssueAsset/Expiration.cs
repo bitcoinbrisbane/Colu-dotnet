@@ -3,7 +3,7 @@ using System;
 
 namespace Colu.Models.IssueAsset
 {
-    public class Experation
+    public class Expiration
     {
         [JsonProperty("validUntil")]
         public Int64 ValidUntil { get; set; }
