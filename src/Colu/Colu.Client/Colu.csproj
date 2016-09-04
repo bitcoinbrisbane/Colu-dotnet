@@ -62,6 +62,7 @@
     <Compile Include="Models\GetAssetData\Result.cs" />
     <Compile Include="Models\GetAssetMetaData\Request.cs" />
     <Compile Include="Models\GetAssets\Request.cs" />
+    <Compile Include="Models\GetAssets\Response.cs" />
     <Compile Include="Models\GetPrivateSeed\Request.cs" />
     <Compile Include="Models\GetPrivateSeed\Response.cs" />
     <Compile Include="Models\GetAssetHolders\GetAssetDataRequest.cs" />
@@ -72,11 +73,17 @@
     <Compile Include="Models\GetAssetHolders\Result.cs" />
     <Compile Include="Models\IRequest.cs" />
     <Compile Include="Models\IssueAsset\Domain.cs" />
+    <Compile Include="Models\IssueAsset\Expiration.cs" />
+    <Compile Include="Models\IssueAsset\Fee.cs" />
+    <Compile Include="Models\IssueAsset\Holders.cs" />
+    <Compile Include="Models\IssueAsset\Item.cs" />
     <Compile Include="Models\IssueAsset\MetaData.cs" />
+    <Compile Include="Models\IssueAsset\Minters.cs" />
     <Compile Include="Models\IssueAsset\Request.cs" />
     <Compile Include="Models\IssueAsset\AssetParams.cs" />
     <Compile Include="Models\IssueAsset\Response.cs" />
     <Compile Include="Models\IssueAsset\Result.cs" />
+    <Compile Include="Models\IssueAsset\Rules.cs" />
     <Compile Include="Models\IssueAsset\Url.cs" />
     <Compile Include="Models\IssueAsset\Verification.cs" />
     <Compile Include="Models\Response.cs" />

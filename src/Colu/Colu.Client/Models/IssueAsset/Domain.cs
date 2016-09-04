@@ -6,6 +6,6 @@ namespace Colu.Models.IssueAsset
     public class Domain
     {
         [JsonProperty("url")]
-        public String url { get; set; }
+        public String Url { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Colu.Models.IssueAsset
 {
-    public class Request : Response, IRequest
+    public class Request : Models.Request, IRequest
     {
         [JsonProperty("params")]
         public AssetParams Param { get; set; }
@@ -13,9 +13,14 @@ namespace Colu.Models.IssueAsset
         [JsonProperty("transfer")]
         public IList<To> Transfer { get; set; }
 
+        [JsonProperty("rules")]
+        public Rules Rules { get; set; }
+
+        [JsonProperty("minters")]
+        public IList<Minters> Minters { get; set; }
+
         public Request()
         {
-            this.jsonrpc = "2.0";
             this.Method = "issueAsset";
             this.Param = new IssueAsset.AssetParams();
             this.Transfer = new List<To>();
@@ -23,7 +28,6 @@ namespace Colu.Models.IssueAsset
 
         public Request(Int32 n)
         {
-            this.jsonrpc = "2.0";
             this.Method = "issueAsset";
             this.Param = new IssueAsset.AssetParams();
             this.Transfer = new List<To>(n);

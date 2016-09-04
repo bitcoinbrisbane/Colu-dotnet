@@ -1,23 +1,17 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Colu.Models.GetAssetData
 {
     public class AssetData
     {
+        [JsonProperty("address")]
+        public String Address { get; set; }
+
+        [JsonProperty("amount")]
+        public Int64 Amount { get; set; }
+
         [JsonProperty("utxo")]
         public String Utxo { get; set; }
-
-        [JsonProperty("metadata")]
-        public IList<MetaData> MetaData { get; set; }
-
-        public AssetData()
-        {
-            this.MetaData = new List<MetaData>();
-        }
     }
 }
