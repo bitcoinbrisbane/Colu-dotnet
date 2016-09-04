@@ -9,13 +9,27 @@ namespace ColuClient.Tests
     public class ColuClientTests
     {
         private const String MAINNET_HOST = "http://bitcoinaa3.cloudapp.net:8081";
-        private const String TESTNET_HOST = "http://autarky.cloudapp.net:8081";
+        private const String TESTNET_HOST = "http://bitcoinbrisbane.cloudapp.net:8081";
         private const String HOME_HOST = "http://127.0.0.1:8081";
 
         private const String BITPOKER_ASSET_ID = "Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ";
         private const String TESTNET_ADDRESS = "mq7Q4GWWWkedjxsDTQJznwWgBMm5s5CnEE";
         private const String TESTNET_ADDRESS_2 = "mtePqcTfyTfD8hGztZ4zHpqPBPQwjVdCna";
         private const String TESTNET_ADDRESS_3 = "mhEeZWdMzXVLMzWBUHueij27h2smvaAdUc";
+
+        private String _address;
+
+        [TestInitialize]
+        public void Setup()
+        {
+            using (IAddressClient client = new Client(TESTNET_HOST))
+            {
+                String id = Guid.NewGuid().ToString();
+                var response = client.GetAddressAsync(id).Result;
+
+                _address = response.Address;
+            }
+        }
 
         [TestMethod]
         public async Task Should_Get_Private_Seed()
@@ -176,6 +190,44 @@ namespace ColuClient.Tests
             }
         }
 
+        [TestMethod]
+        public async Task Should_Issue_Asset_With_Metadata_And_Rules()
+        {
+            using (Client client = new Client(TESTNET_HOST))
+            {
+                var request = new Colu.Models.IssueAsset.Request()
+                {
+                    Id = Guid.NewGuid().ToString()
+                };
+
+                request.Rules = new Colu.Models.IssueAsset.Rules();
+                request.Rules.Expiration = new Colu.Models.IssueAsset.Expiration();
+
+                TimeSpan t = DateTime.UtcNow - new DateTime(1970, 1, 1);
+                Int64 epoch = (Int64)t.TotalSeconds;
+                request.Rules.Expiration.ValidUntil = epoch;
+
+                request.Param.Amount = 10;
+                request.Param.Divisibility = 0;
+                request.Param.Reissueable = true;
+                request.Param.IssueAddress = _address;
+
+                request.Param.MetaData.AssetName = "General Fisheries Permit";
+                request.Param.MetaData.Issuer = "Queensland Government";
+
+                var iconUrl = new Colu.Models.IssueAsset.Url()
+                {
+                    Name = "icon",
+                    MimeType = "image/png",
+                    url = "https://blockchainpermits.azurewebsites.net/images/Fishing-Licence2.png"
+                };
+                request.Param.MetaData.Urls.Add(iconUrl);
+
+                var acutal = await client.IssueAsync(request);
+                Assert.IsNotNull(acutal);
+            }
+        }
+
         [TestMethod, Ignore]
         public async Task Should_Issue_And_Transfer_Asset()
         {
@@ -220,7 +272,12 @@ namespace ColuClient.Tests
 
                 request.param.from.Add(TEST_NET_ADDRESS);
 
-                request.param.to.Add(new Colu.Models.To() { address= "mkK8GmN4q5TnPEZkJmY6LVa5i5kimxwNXB", Amount = 1, AssetId = TESTNET_ASSET_ID });
+                request.param.to.Add(new Colu.Models.To()
+                {
+                    address = "mkK8GmN4q5TnPEZkJmY6LVa5i5kimxwNXB",
+                    Amount = 1,
+                    AssetId = TESTNET_ASSET_ID
+                });
                 var acutal = await client.SendAssetAsync(request);
                 Assert.IsNotNull(acutal);
                 Assert.IsNotNull(acutal.Result);
@@ -267,13 +324,17 @@ namespace ColuClient.Tests
 
                 request.param.from.Add(FROM_ADDRESS);
 
-                request.param.to.Add(new Colu.Models.To() { address = TO_ADDRESS, Amount = 100, AssetId = ASSET_ID });
+                request.param.to.Add(new Colu.Models.To()
+                {
+                    address = TO_ADDRESS,
+                    Amount = 100,
+                    AssetId = ASSET_ID
+                });
                 var acutal = await client.SendAssetAsync(request);
                 Assert.IsNotNull(acutal);
                 Assert.IsNotNull(acutal.Result.TxId);
             }
         }
-
 
         [TestMethod]
         public async Task Should_Get_Address_Info()
