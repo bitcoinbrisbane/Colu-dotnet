@@ -4,7 +4,7 @@ namespace Colu.Models
 {
     public interface IRequest
     {
-        String jsonrpc { get; }
+        String Jsonrpc { get; }
 
         String Method { get; }
     }

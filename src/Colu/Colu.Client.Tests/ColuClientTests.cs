@@ -13,6 +13,7 @@ namespace ColuClient.Tests
         private const String HOME_HOST = "http://127.0.0.1:8081";
 
         private const String BITPOKER_ASSET_ID = "Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ";
+        
         private const String TESTNET_ADDRESS = "mq7Q4GWWWkedjxsDTQJznwWgBMm5s5CnEE";
         private const String TESTNET_ADDRESS_2 = "mtePqcTfyTfD8hGztZ4zHpqPBPQwjVdCna";
         private const String TESTNET_ADDRESS_3 = "mhEeZWdMzXVLMzWBUHueij27h2smvaAdUc";
@@ -34,7 +35,7 @@ namespace ColuClient.Tests
         [TestMethod]
         public async Task Should_Get_Private_Seed()
         {
-            using (Client client = new Client(HOST))
+            using (Client client = new Client(HOME_HOST))
             {
                 var response = await client.GetPrivateSeed();
                 Assert.IsFalse(String.IsNullOrEmpty(response.Result));
@@ -62,7 +63,7 @@ namespace ColuClient.Tests
         [TestMethod]
         public async Task Should_Get_Asset_Holders()
         {
-            using (Client client = new Client(TESTNET_HOST))
+            using (Client client = new Client(MAINNET_HOST))
             {
                 var request = new Colu.Models.GetStakeHolders.Request()
                 {
@@ -75,34 +76,6 @@ namespace ColuClient.Tests
                 Assert.IsNotNull(acutal);
                 Assert.IsNotNull(acutal.Result);
                 Assert.AreEqual(BITPOKER_ASSET_ID, acutal.Result.AssetId);
-                Assert.IsTrue(acutal.Result.Holders.Count > 0);
-            }
-        }
-
-        [TestMethod]
-        public async Task Should_Get_Bitpoker_Asset_Holders()
-        {
-            using (Client client = new Client(MAINNET_HOST))
-            {
-                var acutal = await client.GetStakeHoldersAsync(BITPOKER_ASSET_ID, 1);
-                Assert.IsNotNull(acutal);
-                Assert.IsNotNull(acutal.Result);
-                Assert.AreEqual(BITPOKER_ASSET_ID, acutal.Result.AssetId);
-                Assert.IsTrue(acutal.Result.Holders.Count > 0);
-            }
-        }
-
-        [TestMethod]
-        public async Task Should_Get_Asset_Holders_3()
-        {
-            const String AUTARKY_ASSET_ID = "Ua5QZpRpQLg5YsHY4h9QCCbbo6Z5HJBx6CUJvn";
-
-            using (Client client = new Client(HOME_HOST))
-            {
-                var acutal = await client.GetStakeHoldersAsync(AUTARKY_ASSET_ID, 1);
-                Assert.IsNotNull(acutal);
-                Assert.IsNotNull(acutal.Result);
-                Assert.AreEqual(AUTARKY_ASSET_ID, acutal.Result.AssetId);
                 Assert.IsTrue(acutal.Result.Holders.Count > 0);
             }
         }
@@ -197,8 +170,8 @@ namespace ColuClient.Tests
                 request.Param.IssueAddress = "n3QVmkB9xQgxEgQVR8kGTzq2EHVyqqktwf";// "n3c8uGR9SPiWcPV3fYmLFDojaCH7P8TFgS";
 
                 request.Param.MetaData.AssetName = "Test Bitpoker";
-                request.Param.MetaData.Verification = new Colu.Models.IssueAsset.Verification();
-                request.Param.MetaData.Verification.Domain = new Colu.Models.IssueAsset.Domain() { url = "https://www.bitpoker.io/assets.txt" };
+                //request.Param.MetaData.Verification = new Colu.Models.IssueAsset.Verification();
+                //request.Param.MetaData.Verification.Domain = new Colu.Models.IssueAsset.Domain() { url = "https://www.bitpoker.io/assets.txt" };
 
                 var acutal = await client.IssueAsync(request);
                 Assert.IsNotNull(acutal);
@@ -220,7 +193,7 @@ namespace ColuClient.Tests
 
                 TimeSpan t = DateTime.UtcNow - new DateTime(1970, 1, 1);
                 Int64 epoch = (Int64)t.TotalSeconds;
-                request.Rules.Expiration.ValidUntil = epoch;
+                request.Rules.Expiration.ValidUntil = epoch + 24 * 60 * 60;
 
                 request.Param.Amount = 10;
                 request.Param.Divisibility = 0;
@@ -323,34 +296,6 @@ namespace ColuClient.Tests
             }
         }
 
-        [TestMethod, TestCategory("Testnet")]
-        public async Task Should_Send_Asset_via_Autarky()
-        {
-            const String ASSET_ID = "Ua5QZpRpQLg5YsHY4h9QCCbbo6Z5HJBx6CUJvn";
-            const String FROM_ADDRESS = "mkoffnrkGEMKvswwWXR2LWyXFan68B1UGv";
-            const String TO_ADDRESS = "mvBea3GT2B7iUxESsDioTVcmP492bNzUmf";
-
-            using (Client client = new Client(TESTNET_HOST))
-            {
-                var request = new Colu.Models.SendAsset.Request()
-                {
-                    Id = Guid.NewGuid().ToString()
-                };
-
-                request.param.from.Add(FROM_ADDRESS);
-
-                request.param.to.Add(new Colu.Models.To()
-                {
-                    address = TO_ADDRESS,
-                    Amount = 100,
-                    AssetId = ASSET_ID
-                });
-                var acutal = await client.SendAssetAsync(request);
-                Assert.IsNotNull(acutal);
-                Assert.IsNotNull(acutal.Result.TxId);
-            }
-        }
-
         [TestMethod]
         public async Task Should_Get_Address_Info()
         {
@@ -368,7 +313,7 @@ namespace ColuClient.Tests
             {
                 var acutal = await client.GetAssetDataAsync(BITPOKER_ASSET_ID);
                 Assert.IsNotNull(acutal);
-                Assert.AreEqual("Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ", acutal.Result.AssetId);
+                Assert.AreEqual(BITPOKER_ASSET_ID, acutal.Result.AssetId);
                 Assert.AreEqual(1000000000, acutal.Result.AssetTotalAmount);
             }
         }

@@ -5,7 +5,8 @@ namespace Colu.Models
 {
     public class Request
     {
-        public String jsonrpc { get; private set; }
+        [JsonProperty("jsonrpc")]
+        public string Jsonrpc { get; private set; }
 
         [JsonProperty("method")]
         public String Method { get; internal set; }
@@ -15,7 +16,7 @@ namespace Colu.Models
 
         public Request()
         {
-            this.jsonrpc = "2.0";
+            this.Jsonrpc = "2.0";
         }
     }
 }
