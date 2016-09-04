@@ -14,5 +14,12 @@ namespace Colu.Models.GetAssetData
 
         [JsonProperty("assetTotalAmount")]
         public Int64 AssetTotalAmount { get; set; }
+
+        [JsonProperty("metadata")]
+        public MetaData MetaData { get; set; }
+
+        public Result()
+        {
+        }
     }
 }

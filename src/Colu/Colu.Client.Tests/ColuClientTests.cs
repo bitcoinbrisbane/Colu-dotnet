@@ -15,7 +15,7 @@ namespace ColuClient.Tests
         [TestMethod]
         public async Task Should_Get_Private_Seed()
         {
-            using (Client client = new Client(HOME_HOST))
+            using (Client client = new Client(HOST))
             {
                 var response = await client.GetPrivateSeed();
 
@@ -69,6 +69,21 @@ namespace ColuClient.Tests
                 Assert.IsNotNull(acutal);
                 Assert.IsNotNull(acutal.Result);
                 Assert.AreEqual(BITPOKER_ASSET_ID, acutal.Result.AssetId);
+                Assert.IsTrue(acutal.Result.Holders.Count > 0);
+            }
+        }
+
+        [TestMethod]
+        public async Task Should_Get_Asset_Holders_3()
+        {
+            const String AUTARKY_ASSET_ID = "Ua5QZpRpQLg5YsHY4h9QCCbbo6Z5HJBx6CUJvn";
+
+            using (Client client = new Client(HOME_HOST))
+            {
+                var acutal = await client.GetStakeHoldersAsync(AUTARKY_ASSET_ID, 1);
+                Assert.IsNotNull(acutal);
+                Assert.IsNotNull(acutal.Result);
+                Assert.AreEqual(AUTARKY_ASSET_ID, acutal.Result.AssetId);
                 Assert.IsTrue(acutal.Result.Holders.Count > 0);
             }
         }
@@ -155,7 +170,6 @@ namespace ColuClient.Tests
             }
         }
 
-        //mjD34XbQWnccNrfPs4G1pEJZr8mjKhS8A2
         [TestMethod]
         public async Task Should_Issue_Asset_With_Metadata_And_Verification()
         {
@@ -168,12 +182,12 @@ namespace ColuClient.Tests
 
                 request.Param.Amount = 1;
                 request.Param.Divisibility = 0;
-                request.Param.Reissueable = false;
-                request.Param.IssueAddress = "mjD34XbQWnccNrfPs4G1pEJZr8mjKhS8A2";
+                request.Param.Reissueable = true;
+                request.Param.IssueAddress = "n3QVmkB9xQgxEgQVR8kGTzq2EHVyqqktwf";// "n3c8uGR9SPiWcPV3fYmLFDojaCH7P8TFgS";
 
                 request.Param.MetaData.AssetName = "Test Bitpoker";
-                request.Param.MetaData.Verification = new Colu.Models.IssueAsset.Verification();
-                request.Param.MetaData.Verification.Domain = new Colu.Models.IssueAsset.Domain() { url = "https://www.bitpoker.io/assets.txt" };
+                request.Param.MetaData.Verifications = new Colu.Models.IssueAsset.Verification();
+                request.Param.MetaData.Verifications.Domain = new Colu.Models.IssueAsset.Domain() { url = "https://www.bitpoker.io/assets.txt" };
 
                 var acutal = await client.IssueAsync(request);
                 Assert.IsNotNull(acutal);

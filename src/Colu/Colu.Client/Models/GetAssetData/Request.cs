@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Colu.Models.GetAssetData
 {
-    public class Request : Colu.Models.Request
+    public class Request : Models.Request, IRequest
     {
         private const String METHOD_NAME = "coloredCoins.getAssetData";
 
