@@ -78,6 +78,18 @@ namespace ColuClient.Tests
             }
         }
 
+        [TestMethod, ExpectedException(typeof(InvalidOperationException))]
+        public async Task Should_Not_Get_HD_Address_With_Invalid_Credentials()
+        {
+            using (IAddressClient client = new Client("http://192.168.0.12:8080", "bitcoinbrisbane", "InvalidPassword"))
+            {
+                String id = Guid.NewGuid().ToString();
+                var response = await client.GetAddressAsync(id);
+
+                Assert.IsFalse(String.IsNullOrEmpty(response.Address));
+            }
+        }
+
         [TestMethod]
         public async Task Should_Get_Asset_Holders()
         {
