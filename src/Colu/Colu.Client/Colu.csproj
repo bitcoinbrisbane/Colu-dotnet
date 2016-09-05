@@ -88,9 +88,12 @@
     <Compile Include="Models\IssueAsset\Verification.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="Models\Request.cs" />
+    <Compile Include="Models\SendAsset\Fees.cs" />
+    <Compile Include="Models\SendAsset\MetaData.cs" />
     <Compile Include="Models\SendAsset\Request.cs" />
     <Compile Include="Models\SendAsset\Response.cs" />
     <Compile Include="Models\SendAsset\Result.cs" />
+    <Compile Include="Models\SendAsset\Rules.cs" />
     <Compile Include="Models\SendAsset\SendAsset.cs" />
     <Compile Include="Models\To.cs" />
     <Compile Include="Models\Transfer.cs" />

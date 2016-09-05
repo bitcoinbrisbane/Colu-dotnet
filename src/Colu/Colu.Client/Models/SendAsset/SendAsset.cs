@@ -7,14 +7,21 @@ namespace Colu.Models.SendAsset
     public class SendAsset
     {
         [JsonProperty("from")]
-        public IList<String> from { get; set; }
+        public IList<String> From { get; set; }
 
-        public IList<To> to { get; set; }
+        [JsonProperty("sendutxos")]
+        public IList<String> SendUtxos { get; set; }
+
+        [JsonProperty("to")]
+        public IList<To> To { get; set; }
+
+        [JsonProperty("metadata")]
+        public MetaData MetaData { get; set; }
 
         public SendAsset()
         {
-            this.from = new List<String>();
-            this.to = new List<To>();
+            this.From = new List<String>();
+            this.To = new List<To>();
         }
     }
 }

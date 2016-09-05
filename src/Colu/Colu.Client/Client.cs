@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,7 +16,6 @@ namespace Colu
     {
         private readonly String _host;
         private readonly HttpClient _httpClient;
-
         private const String MEDIA_TYPE = "application/json";
 
         public Client(String host)
@@ -26,6 +27,11 @@ namespace Colu
         public Client(String host, String username, String password)
         {
             _httpClient = new HttpClient();
+
+            if (!String.IsNullOrEmpty(username) && !String.IsNullOrEmpty(password))
+            {
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes(string.Format("{0}:{1}", username, password))));}
+
             _host = host;
         }
 
@@ -180,6 +186,14 @@ namespace Colu
 
         private async Task<String> Post(StringContent requestContent, String url)
         {
+
+    //        request.DefaultRequestHeaders.Authorization =
+    //new AuthenticationHeaderValue(
+    //    "Basic",
+    //    Convert.ToBase64String(
+    //        System.Text.ASCIIEncoding.ASCII.GetBytes(
+    //            string.Format("{0}:{1}", "yourusername", "yourpwd"))));
+
             using (HttpResponseMessage responseMessage = await _httpClient.PostAsync(url, requestContent))
             {
                 if (responseMessage.IsSuccessStatusCode)
