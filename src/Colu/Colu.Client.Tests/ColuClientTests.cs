@@ -10,7 +10,7 @@ namespace ColuClient.Tests
     {
         private const String MAINNET_HOST = "http://bitcoinaa3.cloudapp.net:8081";
         private const String TESTNET_HOST = "http://bitcoinbrisbane.cloudapp.net:8081";
-        private const String HOME_HOST = "http://127.0.0.1:8081";
+        private const String HOME_HOST = "http://127.0.0.1:8080";
 
         private const String BITPOKER_ASSET_ID = "Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ";
         
@@ -329,7 +329,7 @@ namespace ColuClient.Tests
         [TestMethod]
         public async Task Should_Get_Address_Info()
         {
-            using (Client client = new Client(TESTNET_HOST))
+            using (Client client = new Client("https://192.168.0.12:443"))
             {
                 var actual = await client.GetAddressInfoAsync(TESTNET_ADDRESS);
                 Assert.IsNotNull(actual);

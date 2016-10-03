@@ -45,7 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client.cs" />
+    <Compile Include="Exceptions\NotEnoughFundsExceptions.cs" />
     <Compile Include="IAddressClient.cs" />
+    <Compile Include="IAssetClient.cs" />
     <Compile Include="Models\GetAddressInfo\AddressParam.cs" />
     <Compile Include="Models\Asset.cs" />
     <Compile Include="Models\GetAddressInfo\Request.cs" />

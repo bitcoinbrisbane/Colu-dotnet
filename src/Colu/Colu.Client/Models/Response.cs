@@ -10,5 +10,7 @@ namespace Colu.Models
 
         [JsonProperty("id")]
         public String Id { get; set; }
+
+        public TimeSpan Elapsed { get; set; } 
     }
 }

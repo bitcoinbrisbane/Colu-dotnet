@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Colu
 {
-    public class Client : IDisposable, IAddressClient
+    public class Client : IDisposable, IAddressClient, IAssetClient
     {
         private readonly String _host;
         private readonly HttpClient _httpClient;
@@ -50,7 +50,7 @@ namespace Colu
         /// Get a HD address
         /// </summary>
         /// <returns></returns>
-        public async Task<Colu.Models.GetAddress.Response> GetAddressAsync()
+        public async Task<Models.GetAddress.Response> GetAddressAsync()
         {
             Guid id = Guid.NewGuid();
             return await GetAddressAsync(id.ToString());
@@ -61,15 +61,21 @@ namespace Colu
         /// </summary>
         /// <param name="id">Request id</param>
         /// <returns></returns>
-        public async Task<Colu.Models.GetAddress.Response> GetAddressAsync(String id)
+        public async Task<Models.GetAddress.Response> GetAddressAsync(String id)
         {
+            System.Diagnostics.Stopwatch sw = System.Diagnostics.Stopwatch.StartNew();
+
             Models.GetAddress.Request request = new Models.GetAddress.Request() { Id = id };
             String json = JsonConvert.SerializeObject(request);
             StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
             String url = String.Format("{0}", _host);
 
             String content = await Post(requestContent, url);
-            return JsonConvert.DeserializeObject<Models.GetAddress.Response>(content);
+            var response = JsonConvert.DeserializeObject<Models.GetAddress.Response>(content);
+
+            sw.Start();
+            response.Elapsed = sw.Elapsed;
+            return response;
         }
 
         public async Task<Models.GetAddress.Response> GetAddressAsync(Models.GetAddress.Request request)
