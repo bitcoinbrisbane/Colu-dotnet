@@ -192,14 +192,6 @@ namespace Colu
 
         private async Task<String> Post(StringContent requestContent, String url)
         {
-
-    //        request.DefaultRequestHeaders.Authorization =
-    //new AuthenticationHeaderValue(
-    //    "Basic",
-    //    Convert.ToBase64String(
-    //        System.Text.ASCIIEncoding.ASCII.GetBytes(
-    //            string.Format("{0}:{1}", "yourusername", "yourpwd"))));
-
             using (HttpResponseMessage responseMessage = await _httpClient.PostAsync(url, requestContent))
             {
                 if (responseMessage.IsSuccessStatusCode)
@@ -209,6 +201,7 @@ namespace Colu
                 }
                 else
                 {
+                    //maybe here?
                     throw new InvalidOperationException();
                 }
             }

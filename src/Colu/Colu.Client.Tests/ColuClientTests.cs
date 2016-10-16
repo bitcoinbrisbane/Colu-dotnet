@@ -279,7 +279,7 @@ namespace ColuClient.Tests
         public async Task Should_Send_Asset()
         {
             const String TESTNET_ASSET_ID = "La7xWL4k6mr5h5Yi8p3YmN3oxaKPn7x8Ub3YUG";
-            const String TEST_NET_ADDRESS = "mftCzxjSGWRRXh5QDKaTpsCXWmGNEtHX3S";
+            const String TESTNET_ADDRESS = "mftCzxjSGWRRXh5QDKaTpsCXWmGNEtHX3S";
 
             using (Client client = new Client(TESTNET_HOST))
             {
@@ -288,7 +288,7 @@ namespace ColuClient.Tests
                     Id = Guid.NewGuid().ToString()
                 };
 
-                request.param.From.Add(TEST_NET_ADDRESS);
+                request.param.From.Add(TESTNET_ADDRESS);
 
                 request.param.To.Add(new Colu.Models.To()
                 {
@@ -300,6 +300,35 @@ namespace ColuClient.Tests
                 Assert.IsNotNull(actual);
                 Assert.IsNotNull(actual.Result);
                 Assert.IsNotNull(actual.Result.TxId);
+            }
+        }
+
+        [TestMethod, TestCategory("Exceptions")]
+        public async Task Should_Raise_Key_Not_Found_Error()
+        {
+            const String TESTNET_ASSET_ID = "La7xWL4k6mr5h5Yi8p3YmN3oxaKPn7x8Ub3YUG";
+            const String TESTNET_ADDRESS = "mwcDHAuNMDkXhANEByVfJmKKTZ4G6V3tvh";
+
+            using (Client client = new Client(TESTNET_HOST))
+            {
+                var request = new Colu.Models.SendAsset.Request()
+                {
+                    Id = Guid.NewGuid().ToString()
+                };
+
+                request.param.From.Add(TESTNET_ADDRESS);
+
+                request.param.To.Add(new Colu.Models.To()
+                {
+                    address = "mkK8GmN4q5TnPEZkJmY6LVa5i5kimxwNXB",
+                    Amount = 1,
+                    AssetId = TESTNET_ASSET_ID
+                });
+
+                var actual = await client.SendAssetAsync(request);
+                Assert.IsNotNull(actual);
+                Assert.IsNotNull(actual.Error);
+                Assert.AreEqual("Address mwcDHAuNMDkXhANEByVfJmKKTZ4G6V3tvh privateKey not found.", actual.Error.Data);
             }
         }
 
