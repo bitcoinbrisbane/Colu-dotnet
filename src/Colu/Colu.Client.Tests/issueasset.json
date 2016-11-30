@@ -1,0 +1,17 @@
+﻿{
+  "amount": "10",
+
+  "divisibility": "0",
+  "reissueable": "true",
+  "transfer": [
+    {
+      "address": "mvaHph557j63CyJxmEaJ8F38SC3cNetvaa",
+      "amount": 1
+    }
+  ],
+  "metadata": {
+    "assetName": "Mission Impossible 15",
+    "issuer": "Fox Theater",
+    "description": "Movie ticket to see the New Tom Cruise flick"
+  }
+}

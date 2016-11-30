@@ -11,7 +11,13 @@ namespace Colu.Models.IssueAsset
         [JsonProperty("txId")]
         public String TxId { get; set; }
 
+        [JsonProperty("financeTxid")]
+        public String FinanceTxid { get; set; }
+
         [JsonProperty("assetId")]
         public String AssetId { get; set; }
+
+        [JsonProperty("issueAddress")]
+        public String IssueAddress { get; set; }
     }
 }

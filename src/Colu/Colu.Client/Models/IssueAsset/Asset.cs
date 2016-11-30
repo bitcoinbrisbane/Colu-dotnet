@@ -1,9 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 
 namespace Colu.Models.IssueAsset
 {
-    public class AssetParams
+    public class Asset
     {
         [JsonProperty("amount")]
         public Int64 Amount { get; set; }
@@ -20,9 +21,19 @@ namespace Colu.Models.IssueAsset
         [JsonProperty("metadata")]
         public MetaData MetaData { get; set; }
 
-        public AssetParams()
+        [JsonProperty("transfer")]
+        public ICollection<To> Transfer { get; set; }
+
+        [JsonProperty("rules")]
+        public Rules Rules { get; set; }
+
+        [JsonProperty("minters")]
+        public ICollection<Minters> Minters { get; set; }
+
+        public Asset()
         {
             this.MetaData = new MetaData();
+            this.Transfer = new List<To>();
         }
     }
 }

@@ -59,6 +59,9 @@
       <Name>Colu</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="issueasset.json" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

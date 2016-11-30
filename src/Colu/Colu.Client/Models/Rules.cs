@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace Colu.Models.IssueAsset
+namespace Colu.Models
 {
     public class Rules
     {
@@ -9,7 +9,7 @@ namespace Colu.Models.IssueAsset
         public Int32 Version { get; set; }
 
         [JsonProperty("fees")]
-        public Fee Fees { get; set; }
+        public Fees Fees { get; set; }
 
         [JsonProperty("expiration")]
         public Expiration Expiration { get; set; }

@@ -190,6 +190,26 @@ namespace Colu
             return JsonConvert.DeserializeObject<Models.SendAsset.Response>(response);
         }
 
+        //public async Task<Models.SendAsset.Response> BurnAssetAsync(String assetId, UInt64 amount)
+        //{
+        //    String json = JsonConvert.SerializeObject(request);
+        //    StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
+        //    String url = String.Format("{0}", _host);
+
+        //    String response = await Post(requestContent, url);
+        //    return JsonConvert.DeserializeObject<Models.SendAsset.Response>(response);
+        //}
+
+        public async Task<Models.SendAsset.Response> BurnAssetAsync(Models.SendAsset.Request request)
+        {
+            String json = JsonConvert.SerializeObject(request);
+            StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
+            String url = String.Format("{0}", _host);
+
+            String response = await Post(requestContent, url);
+            return JsonConvert.DeserializeObject<Models.SendAsset.Response>(response);
+        }
+
         private async Task<String> Post(StringContent requestContent, String url)
         {
             using (HttpResponseMessage responseMessage = await _httpClient.PostAsync(url, requestContent))

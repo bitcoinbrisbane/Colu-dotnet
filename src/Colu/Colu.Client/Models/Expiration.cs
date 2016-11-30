@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace Colu.Models.IssueAsset
+namespace Colu.Models
 {
     public class Expiration
     {

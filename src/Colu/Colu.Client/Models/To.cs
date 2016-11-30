@@ -6,7 +6,7 @@ namespace Colu.Models
     public class To
     {
         [JsonProperty("address")]
-        public String address { get; set; }
+        public String Address { get; set; }
 
         [JsonProperty("phoneNumber")]
         public String PhoneNumber { get; set; }
