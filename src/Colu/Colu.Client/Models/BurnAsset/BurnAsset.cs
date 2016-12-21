@@ -11,5 +11,10 @@ namespace Colu.Models.BurnAsset
 
         [JsonProperty("burn")]
         public ICollection<Burn> Burn { get; set; }
+
+        public BurnAsset()
+        {
+            this.Burn = new List<Burn>();
+        }
     }
 }

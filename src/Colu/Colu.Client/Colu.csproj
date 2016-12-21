@@ -48,7 +48,8 @@
     <Compile Include="Exceptions\PrivateKeyNotFoundExceptions.cs" />
     <Compile Include="Exceptions\NotEnoughFundsExceptions.cs" />
     <Compile Include="IAddressClient.cs" />
-    <Compile Include="IAssetClient.cs" />
+    <Compile Include="IAssetInfoClient.cs" />
+    <Compile Include="IIsuanceClient.cs" />
     <Compile Include="Models\BurnAsset\Burn.cs" />
     <Compile Include="Models\BurnAsset\BurnAsset.cs" />
     <Compile Include="Models\BurnAsset\Request.cs" />

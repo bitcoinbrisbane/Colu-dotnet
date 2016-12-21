@@ -9,6 +9,6 @@ namespace Colu.Models.IssueAsset
         [JsonProperty("locked")]
         public Boolean Locked { get; set; }
 
-        public IList<Item> Item { get; set; }
+        public ICollection<Item> Item { get; set; }
     }
 }

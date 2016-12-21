@@ -13,7 +13,7 @@ namespace Colu.Models.IssueAsset
         public String Issuer { get; set; }
 
         [JsonProperty("urls")]
-        public IList<Url> Urls { get; set; }
+        public ICollection<Url> Urls { get; set; }
 
         [JsonProperty("verifications")]
         public Verification Verifications { get; set; }

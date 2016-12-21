@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Colu
 {
-    public class Client : IDisposable, IAddressClient, IAssetClient
+    public class Client : IDisposable, IAddressClient, IAssetInfoClient, IIsuanceClient
     {
         private readonly String _host;
         private readonly HttpClient _httpClient;
@@ -200,7 +200,7 @@ namespace Colu
         //    return JsonConvert.DeserializeObject<Models.SendAsset.Response>(response);
         //}
 
-        public async Task<Models.SendAsset.Response> BurnAssetAsync(Models.SendAsset.Request request)
+        public async Task<Models.SendAsset.Response> BurnAssetAsync(Models.BurnAsset.Request request)
         {
             String json = JsonConvert.SerializeObject(request);
             StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);

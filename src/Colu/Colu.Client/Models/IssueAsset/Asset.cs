@@ -30,6 +30,9 @@ namespace Colu.Models.IssueAsset
         [JsonProperty("minters")]
         public ICollection<Minters> Minters { get; set; }
 
+        [JsonProperty("userData")]
+        public Object UserData { get; set; }
+
         public Asset()
         {
             this.MetaData = new MetaData();

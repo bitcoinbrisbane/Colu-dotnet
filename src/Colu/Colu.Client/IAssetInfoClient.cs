@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Colu
 {
-    public interface IAssetClient : IDisposable
+    public interface IAssetInfoClient : IDisposable
     {
         Task<Models.GetAssets.Response> GetAssetsAsync();
 

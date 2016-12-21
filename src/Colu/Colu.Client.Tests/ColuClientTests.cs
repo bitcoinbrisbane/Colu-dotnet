@@ -121,7 +121,7 @@ namespace ColuClient.Tests
 
                 request.Param.Amount = 1000;
                 request.Param.Divisibility = 0;
-                request.Param.Reissueable = false;
+                request.Param.Reissueable = true;
                 request.Param.IssueAddress = TESTNET_ADDRESS;
 
                 request.Param.MetaData.AssetName = "General Fisheries Permit";
@@ -163,7 +163,7 @@ namespace ColuClient.Tests
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Issue")]
         public async Task Should_Issue_Asset_With_Metadata_And_Verification()
         {
             using (Client client = new Client(HOST, USERNAME, PASSWORD))
@@ -176,9 +176,9 @@ namespace ColuClient.Tests
                 request.Param.Amount = 1;
                 request.Param.Divisibility = 0;
                 request.Param.Reissueable = true;
-                request.Param.IssueAddress = "n3QVmkB9xQgxEgQVR8kGTzq2EHVyqqktwf";// "n3c8uGR9SPiWcPV3fYmLFDojaCH7P8TFgS";
+                request.Param.IssueAddress = TESTNET_ADDRESS;
 
-                request.Param.MetaData.AssetName = "Test Bitpoker";
+                request.Param.MetaData.AssetName = "Test";
                 //request.Param.MetaData.Verification = new Colu.Models.IssueAsset.Verification();
                 //request.Param.MetaData.Verification.Domain = new Colu.Models.IssueAsset.Domain() { url = "https://www.bitpoker.io/assets.txt" };
 
@@ -190,14 +190,15 @@ namespace ColuClient.Tests
         [TestMethod, TestCategory("Issue")]
         public async Task Should_Issue_Asset_With_Metadata_And_Rules()
         {
-            using (Client client = new Client(HOST, USERNAME, PASSWORD))
+            using (Client client = new Client(HOST))
             {
                 var request = new Colu.Models.IssueAsset.Request()
                 {
                     Id = Guid.NewGuid().ToString()
                 };
 
-                //request.Param.Rules = new Colu.Models.Rules();
+                request.Param.Rules = new Colu.Models.Rules(1);
+
 
                 //TimeSpan t = DateTime.UtcNow - new DateTime(1970, 1, 1);
                 //Int64 epoch = (Int64)t.TotalSeconds;
@@ -206,6 +207,7 @@ namespace ColuClient.Tests
                 request.Param.Amount = 10;
                 request.Param.Divisibility = 0;
                 request.Param.Reissueable = true;
+                request.Param.IssueAddress = TESTNET_ADDRESS;
  
                 request.Param.MetaData.AssetName = "General Fisheries Permit";
                 request.Param.MetaData.Issuer = "Queensland Government";
@@ -216,7 +218,10 @@ namespace ColuClient.Tests
                     MimeType = "image/png",
                     url = "https://blockchainpermits.azurewebsites.net/images/Fishing-Licence2.png"
                 };
+
                 request.Param.MetaData.Urls.Add(iconUrl);
+
+                
 
                 var actual = await client.IssueAsync(request);
                 Assert.IsNotNull(actual);
@@ -366,7 +371,9 @@ namespace ColuClient.Tests
         {
             using (Client client = new Client(HOST, USERNAME, PASSWORD))
             {
-                var actual = await client.BurnAssetAsync(null);
+                Colu.Models.BurnAsset.Request request = new Colu.Models.BurnAsset.Request();
+                request.Param.Burn.Add(new Colu.Models.BurnAsset.Burn() { Amount = 1, AssetId = "Ua56JfLDxtaHoXWeNYmwPyi3QzuJkFW1H3wjXy" });
+                var actual = await client.BurnAssetAsync(request);
                 Assert.IsNotNull(actual);
             }
         }
