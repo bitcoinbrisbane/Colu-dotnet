@@ -33,6 +33,9 @@ namespace Colu.Models.IssueAsset
         [JsonProperty("userData")]
         public Object UserData { get; set; }
 
+        [JsonProperty("expiration")]
+        public Expiration Expiration { get; set; }
+
         public Asset()
         {
             this.MetaData = new MetaData();

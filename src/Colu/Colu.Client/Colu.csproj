@@ -82,6 +82,7 @@
     <Compile Include="Models\IRequest.cs" />
     <Compile Include="Models\IssueAsset\Domain.cs" />
     <Compile Include="Models\Expiration.cs" />
+    <Compile Include="Models\IssueAsset\Expiration.cs" />
     <Compile Include="Models\IssueAsset\Fee.cs" />
     <Compile Include="Models\IssueAsset\Holders.cs" />
     <Compile Include="Models\Item.cs" />
