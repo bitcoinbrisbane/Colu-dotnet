@@ -6,6 +6,13 @@ A client object has been created to make calls to Colus server.  Full documenati
 ## Methods supported
 1. BurnAsset
 2. GetPrivateSeed
+3. GetAddress
+4. GetAddressInfo
+5. GetAssetData
+6. GetAssetHolders
+7. GetAssetMetaData
+8. IssueAsset
+9. SendAsset
 
 ## Examples
 You can view example using via the "unit tests".  However, here are some examples
