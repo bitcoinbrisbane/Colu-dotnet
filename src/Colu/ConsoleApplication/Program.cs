@@ -16,7 +16,7 @@ namespace ConsoleApplication
             {
                 String id = Guid.NewGuid().ToString();
                 var response = addressClient.GetAddressAsync(id).Result;
-                String address = response.Address;
+                String address = response.Result;
 
                 using (Client client = new Client(HOST))
                 {
