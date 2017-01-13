@@ -252,7 +252,7 @@ namespace ColuClient.Tests
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Send")]
         public async Task Should_Send_Asset()
         {
             const String TESTNET_ASSET_ID = "La7xWL4k6mr5h5Yi8p3YmN3oxaKPn7x8Ub3YUG";
@@ -310,7 +310,7 @@ namespace ColuClient.Tests
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Send")]
         public async Task Should_Send_Asset_via_Phone()
         {
             //fishing permit on mainnet
@@ -333,7 +333,7 @@ namespace ColuClient.Tests
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Assets")]
         public async Task Should_Get_Address_Info()
         {
             using (Client client = new Client(HOST, USERNAME, PASSWORD))
@@ -344,7 +344,7 @@ namespace ColuClient.Tests
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Assets")]
         public async Task Should_Get_Asset_Data()
         {
             using (Client client = new Client(HOST, USERNAME, PASSWORD))
@@ -356,7 +356,7 @@ namespace ColuClient.Tests
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Assets")]
         public async Task Should_Get_Assets()
         {
             using (Client client = new Client(HOST, USERNAME, PASSWORD))
@@ -366,7 +366,7 @@ namespace ColuClient.Tests
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Burn")]
         public async Task Should_Burn_Assets()
         {
             using (Client client = new Client(HOST, USERNAME, PASSWORD))
