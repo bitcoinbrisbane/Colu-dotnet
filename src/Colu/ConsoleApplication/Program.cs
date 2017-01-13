@@ -1,9 +1,5 @@
 ﻿using Colu;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApplication
 {
@@ -11,7 +7,8 @@ namespace ConsoleApplication
     {
         static void Main(string[] args)
         {
-            const String HOST = "http://colunode.cloudapp.net";
+            //const String HOST = "http://colunode.cloudapp.net";
+            const String HOST = "http://192.168.0.9:8081";
             const String USERNAME = "bitcoinbrisbane";
             const String PASSWORD = "Test1234";
 

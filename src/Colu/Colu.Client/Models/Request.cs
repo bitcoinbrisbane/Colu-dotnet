@@ -17,6 +17,7 @@ namespace Colu.Models
         public Request()
         {
             this.Jsonrpc = "2.0";
+            Id = Guid.NewGuid().ToString();
         }
     }
 }
