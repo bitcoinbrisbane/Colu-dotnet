@@ -28,5 +28,18 @@ public async Task Should_Get_Private_Seed()
 }
 ```
 
+## Notes for setting up a Ubuntu VM node
+```
+sudo apt-get install nodejs
+sudo apt install nodejs-legacy
+sudo apt-get install npm
+sudo apt-get update
+sudo npm i -g colu
+sudo nano /usr/local/bin/colu #Change port and add API Key if required
+sudo colu
+sudo npm install pm2 -g
+sudo pm2 start colu
+```
+
 ## Support
 Donations can be made to 33ERRzqgfGts1iJWz44fSnAH5FkREr1qAL
