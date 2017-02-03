@@ -15,6 +15,7 @@ namespace Colu.Models.BurnAsset
         public BurnAsset()
         {
             this.Burn = new List<Burn>();
+            this.From = new List<String>();
         }
     }
 }

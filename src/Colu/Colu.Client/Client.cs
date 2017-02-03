@@ -1,40 +1,35 @@
-﻿
-using Colu.Models;
+﻿using Colu.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Security;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace Colu
 {
-    public class Client : IDisposable, IAddressClient, IAssetInfoClient, IIsuanceClient
+    public class Client : BaseClient, IDisposable, IAddressClient, IAssetInfoClient, IIsuanceClient, ISecurityClient
     {
-        private readonly String _host;
-        private readonly HttpClient _httpClient;
+        //private readonly String _host;
+        ////private readonly HttpClient _httpClient;
         private const String MEDIA_TYPE = "application/json";
+
+        public TimeSpan TimeOut { get; set; }
 
         public Client(String host)
         {
-            _httpClient = new HttpClient() { Timeout = new TimeSpan(0, 0, 10) };
+            this.TimeOut = new TimeSpan(0, 0, 10);
             _host = host;
         }
 
         public Client(String host, String username, String password)
         {
-            _httpClient = new HttpClient();
-
-            if (!String.IsNullOrEmpty(username) && !String.IsNullOrEmpty(password))
-            {
-                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes(string.Format("{0}:{1}", username, password))));}
-
             _host = host;
+            base.username = username;
+            base.password = password;
         }
 
+        [Obsolete("Use GetPrivateSeedAsync")]
         public async Task<Models.GetPrivateSeed.Response> GetPrivateSeed()
         {
             Models.GetPrivateSeed.Request request = new Models.GetPrivateSeed.Request();
@@ -210,26 +205,30 @@ namespace Colu
             return JsonConvert.DeserializeObject<Models.SendAsset.Response>(response);
         }
 
-        private async Task<String> Post(StringContent requestContent, String url)
+        public async Task<Models.GetPrivateSeed.Response> GetPrivateSeedAsync()
         {
-            using (HttpResponseMessage responseMessage = await _httpClient.PostAsync(url, requestContent))
-            {
-                if (responseMessage.IsSuccessStatusCode)
-                {
-                    String responseContent = await responseMessage.Content.ReadAsStringAsync();
-                    return responseContent;
-                }
-                else
-                {
-                    //maybe here?
-                    throw new InvalidOperationException();
-                }
-            }
+            Models.GetPrivateSeed.Request request = new Models.GetPrivateSeed.Request();
+            String json = JsonConvert.SerializeObject(request);
+            StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
+            String url = String.Format("{0}", _host);
+
+            String content = await Post(requestContent, url);
+            return JsonConvert.DeserializeObject<Models.GetPrivateSeed.Response>(content);
+        }
+
+        public async Task<Models.GetMnemonic.Response> GetMnemonicAsync()
+        {
+            Models.GetMnemonic.Request request = new Models.GetMnemonic.Request();
+            String json = JsonConvert.SerializeObject(request);
+            StringContent requestContent = new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
+            String url = String.Format("{0}", _host);
+
+            String content = await Post(requestContent, url);
+            return JsonConvert.DeserializeObject<Models.GetMnemonic.Response>(content);
         }
 
         public void Dispose()
         {
-            _httpClient.Dispose();
         }
     }
 }
